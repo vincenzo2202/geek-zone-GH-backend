@@ -70,6 +70,17 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Event::class, 'event_user');
     }
+    // Relaciones con followers
+    public function following()
+    {
+        return $this->belongsToMany(User::class, 'followers', 'following_id', 'follower_id');
+    }
+
+    public function follower()
+    {
+        return $this->belongsToMany(User::class,  'followers', 'follower_id', 'following_id');
+    }
+     
 
  
 }
