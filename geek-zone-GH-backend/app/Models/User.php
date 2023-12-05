@@ -30,7 +30,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-
+    // Relaciones con feed
     public  function feeds()
     {
         return $this->hasMany(Feed::class);
@@ -45,7 +45,7 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Feed::class, 'likes');
     }
-
+    // relaciones con chat
     public  function chats()
     {
         return $this->hasMany(Chat::class);
@@ -60,7 +60,16 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Chat::class, 'chat_user');
     }
+    // Relaciones con Events
+    public  function events()
+    {
+        return $this->hasMany(Event::class);
+    }
 
+    public function event_userToEvent(): BelongsToMany
+    {
+        return $this->belongsToMany(Event::class, 'event_user');
+    }
 
  
 }
