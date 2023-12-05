@@ -31,7 +31,7 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    public  function feed()
+    public  function feeds()
     {
         return $this->hasMany(Feed::class);
     }
@@ -45,5 +45,22 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Feed::class, 'likes');
     }
+
+    public  function chats()
+    {
+        return $this->hasMany(Chat::class);
+    }
+
+    public function messageTochat(): BelongsToMany
+    {
+        return $this->belongsToMany(Chat::class, 'messages');
+    }
+
+    public function Chat_UserToChat(): BelongsToMany
+    {
+        return $this->belongsToMany(Chat::class, 'chat_user');
+    }
+
+
  
 }
