@@ -44,4 +44,40 @@ class UsersController extends Controller
             );
         }
     }
+
+    public function getAllTeachers()
+    {
+        try {
+            $users = User::query()->where('role', 'admin')->get();
+
+            if($users->isEmpty()){
+                return response()->json(
+                    [
+                        "success" => true,
+                        "message" => "There are not any game", 
+                    ],
+                    Response::HTTP_OK
+                ); 
+            }
+    
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Games obtained succesfully",
+                    "data" => $users
+                ],
+                Response::HTTP_OK
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error obtaining the games"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
 }
