@@ -27,7 +27,7 @@ Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
     Route::get('/profile', [AuthController::class, 'profile']);
-    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/logout', [AuthController::class, 'logout']); 
     Route::put('/profile', [UserController::class, 'updateProfile']);
     Route::delete('/user', [UserController::class, 'deleteUser']);
 });
@@ -45,9 +45,9 @@ Route::group([
 ], function () {
     Route::get('/feeds', [FeedController::class, 'getAllfeeds']);
     Route::get('/feeds/{id}', [FeedController::class, 'getfeedById']);
+    Route::post('/createFeed', [FeedController::class, 'createFeed']);
+    Route::put('/updateFeed', [FeedController::class, 'updateFeed']);
     //TODO----------------------------->
-    Route::post('/neewFeed', [FeedController::class, 'createFeed']);
-    Route::put('/feeds', [FeedController::class, 'updateFeed']);
     Route::delete('/feeds/{id}', [FeedController::class, 'deleteFeed']);
 });
 //COMMENTS
@@ -95,22 +95,7 @@ Route::group([
     Route::delete('/chat_user/{id}', [ChatUserController::class, 'deleteChatUser']);
 });
 
-// EVENTS
-Route::group([ 
-    'middleware' => ['auth:sanctum']
-], function () {
-    Route::get('/events', [EventController::class, 'getAllEvents']);
-    Route::post('/events', [EventController::class, 'createEvent']);
-    Route::put('/events', [EventController::class, 'updateEvent']);
-    Route::delete('/events/{id}', [EventController::class, 'deleteEvent']);
-});
-// EVENT_USER
-Route::group([
-    'middleware' => ['auth:sanctum']
-], function () {
-    Route::get('/event_user', [EventUserController::class, 'getAllEventUsers']);
-    Route::delete('/event_user/{id}', [EventUserController::class, 'deleteEventUser']);
-});
+
 //FOLLOWERS     
 Route::group([
     'middleware' => ['auth:sanctum']
@@ -127,6 +112,24 @@ Route::group([
     'middleware' => ['auth:sanctum']
 ], function () { 
     Route::post('/event_user', [EventUserController::class, 'createEventUser']);
+});
+
+// EVENTS
+Route::group([ 
+    'middleware' => ['auth:sanctum']
+], function () {
+    Route::get('/events', [EventController::class, 'getAllEvents']);
+    Route::post('/events', [EventController::class, 'createEvent']);
+    Route::put('/events', [EventController::class, 'updateEvent']);
+    Route::delete('/events/{id}', [EventController::class, 'deleteEvent']);
+});
+
+// EVENT_USER
+Route::group([
+    'middleware' => ['auth:sanctum']
+], function () {
+    Route::get('/event_user', [EventUserController::class, 'getAllEventUsers']);
+    Route::delete('/event_user/{id}', [EventUserController::class, 'deleteEventUser']);
 });
 
 

@@ -145,4 +145,78 @@ class FeedController extends Controller
 
         return $validator;
     }
+
+    public function updateFeed(Request $request)
+    {
+        try {
+            $user = auth()->user();
+            $feedID = $request->input('id');
+            $feed = Feed::query()->find($feedID);
+
+            $validator = $this->validateFeeds($request);
+
+            if ($validator->fails()) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "Error updating post",
+                        "error" => $validator->errors()
+                    ],
+                    Response::HTTP_BAD_REQUEST
+                );
+            }
+
+            if($feed->user_id != $user->id){
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "You are not the owner of this post"
+                    ],
+                    Response::HTTP_BAD_REQUEST
+                );
+            }
+
+            $title = $request->input('title');
+            $content = $request->input('content');
+            $photo = $request->input('photo');
+
+            if (empty($photo)) {
+                $photo = '';
+            };
+
+            if ($request->has('title')) {
+                $feed->title = $title;
+            }
+
+            if ($request->has('content')) {
+                $feed->content = $content;
+            }
+
+            if ($request->has('photo')) {
+                $feed->photo = $photo;
+            }
+
+            $feed->save();
+
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Post updated",
+                    "data" => $feed
+                ],
+                Response::HTTP_CREATED
+            );
+            
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error updating post"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
 }
