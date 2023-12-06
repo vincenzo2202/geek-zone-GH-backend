@@ -31,8 +31,6 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-  
-
     // Relaciones con feed
     public  function feeds()
     {
