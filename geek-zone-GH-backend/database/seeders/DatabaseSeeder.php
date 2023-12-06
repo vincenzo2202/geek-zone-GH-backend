@@ -26,6 +26,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ChatSeeder::class,
         ]);
+
+        $this->call([
+            Chat_userSeeder::class,
+        ]);
     }
 
 }
