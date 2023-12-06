@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
- 
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -14,46 +14,46 @@ class AuthController extends Controller
 {
     public function register(Request $request)
     {
-       try {
-        $validator = $this->validateRegister($request);
+        try {
+            $validator = $this->validateRegister($request);
 
-        if ($validator->fails()) {
+            if ($validator->fails()) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "Error registering user",
+                        "error" => $validator->errors()
+                    ],
+                    Response::HTTP_BAD_REQUEST
+                );
+            }
+
+            $photo = $request->input('photo');
+
+            if (empty($photo)) {
+                $photo = 'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png';
+            };
+
+            $newUser = User::create([
+                'name' => $request->input('name'),
+                'last_name' => $request->input('last_name'),
+                'email' => $request->input('email'),
+                'password' => bcrypt($request->input('password')),
+                'city' => $request->input('city'),
+                'phone_number' => $request->input('phone_number'),
+                'photo' =>  $photo
+            ]);
+
             return response()->json(
                 [
-                    "success" => false,
-                    "message" => "Error registering user",
-                    "error" => $validator->errors()
+                    "success" => true,
+                    "message" => "User registered",
+                    "data" => $newUser
                 ],
-                Response::HTTP_BAD_REQUEST
+                Response::HTTP_CREATED
             );
-        }
-
-        $photo = $request->input('photo');
-
-        if(empty($photo)){
-            $photo = 'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png';
-        };
-
-        $newUser = User::create([
-            'name' => $request->input('name'),
-            'last_name' => $request->input('last_name'),
-            'email' => $request->input('email'),
-            'password' => bcrypt($request->input('password')),
-            'city' => $request->input('city'),
-            'phone_number' => $request->input('phone_number'),  
-            'photo' =>  $photo
-        ]);
-
-        return response()->json(
-            [
-                "success" => true,
-                "message" => "User registered",
-                "data" => $newUser
-            ],
-            Response::HTTP_CREATED
-        );
-       } catch (\Throwable $th) {
-        Log::error($th->getMessage());
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
 
             return response()->json(
                 [
@@ -62,8 +62,7 @@ class AuthController extends Controller
                 ],
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );
-       }
-        
+        }
     }
 
     private function validateRegister(Request $request)
@@ -79,5 +78,62 @@ class AuthController extends Controller
         ]);
 
         return $validator;
+    }
+
+    public function login(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|email',
+                'password' => 'required|min:6|max:12|regex:/^[a-zA-Z0-9._-]+$/',
+            ]);
+
+            if ($validator->fails()) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "Error login user",
+                        "error" => $validator->errors()
+                    ],
+                    Response::HTTP_BAD_REQUEST
+                );
+            }
+
+            $email = $request->input('email');
+            $password = $request->input('password');
+
+            $user = User::query()->where('email', $email)->first();
+
+            if (!$user || !Hash::check($password, $user->password)) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "Email or password are invalid"
+                    ],
+                    Response::HTTP_NOT_FOUND
+                );
+            }
+
+            $token = $user->createToken('apiToken')->plainTextToken;
+
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "User Logged",
+                    "token" => $token,
+                    "data" => $user
+                ]
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error logging in user"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
     }
 }
