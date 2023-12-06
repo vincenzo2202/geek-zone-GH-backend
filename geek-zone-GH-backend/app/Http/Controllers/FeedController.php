@@ -219,4 +219,43 @@ class FeedController extends Controller
             );
         }
     }
+
+    public function deleteFeed(Request $request, $id)
+    {
+        try {
+            $user = auth()->user();
+            $feed = Feed::query()->find($id);
+
+            if($feed->user_id != $user->id){
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "You are not the owner of this post"
+                    ],
+                    Response::HTTP_BAD_REQUEST
+                );
+            }
+
+            Feed::destroy($id);
+
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Post deleted",
+                ],
+                Response::HTTP_OK
+            );
+            
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error deleting post"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
 }

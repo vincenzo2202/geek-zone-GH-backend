@@ -48,7 +48,7 @@ Route::group([
     Route::post('/createFeed', [FeedController::class, 'createFeed']);
     Route::put('/updateFeed', [FeedController::class, 'updateFeed']);
     //TODO----------------------------->
-    Route::delete('/feeds/{id}', [FeedController::class, 'deleteFeed']);
+    Route::delete('/deleteFeed/{id}', [FeedController::class, 'deleteFeed']);
 });
 //COMMENTS
 Route::group([
