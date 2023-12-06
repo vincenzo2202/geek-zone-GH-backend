@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\Feed::factory(30)->create();
+        \App\Models\Like::factory(30)->create();
+        \App\Models\Comment::factory(30)->create();
     }
 
 }
