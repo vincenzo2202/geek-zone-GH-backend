@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UsersController extends Controller
 {
-    public function getAllUsers()
+    public function getAllUsers(Request $request)
     {
         try {
             $users = User::query()->get();
@@ -18,7 +18,7 @@ class UsersController extends Controller
                 return response()->json(
                     [
                         "success" => true,
-                        "message" => "There are not any game", 
+                        "message" => "There are not any user", 
                     ],
                     Response::HTTP_OK
                 ); 
@@ -27,7 +27,7 @@ class UsersController extends Controller
             return response()->json(
                 [
                     "success" => true,
-                    "message" => "Games obtained succesfully",
+                    "message" => "Users obtained succesfully",
                     "data" => $users
                 ],
                 Response::HTTP_OK
@@ -38,14 +38,14 @@ class UsersController extends Controller
             return response()->json(
                 [
                     "success" => false,
-                    "message" => "Error obtaining the games"
+                    "message" => "Error obtaining the users"
                 ],
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );
         }
     }
 
-    public function getAllTeachers()
+    public function getAllTeachers(Request $request)
     {
         try {
             $users = User::query()->where('role', 'admin')->get();
@@ -54,7 +54,7 @@ class UsersController extends Controller
                 return response()->json(
                     [
                         "success" => true,
-                        "message" => "There are not any game", 
+                        "message" => "There are not any Teacher", 
                     ],
                     Response::HTTP_OK
                 ); 
@@ -63,7 +63,7 @@ class UsersController extends Controller
             return response()->json(
                 [
                     "success" => true,
-                    "message" => "Games obtained succesfully",
+                    "message" => "Teachers obtained succesfully",
                     "data" => $users
                 ],
                 Response::HTTP_OK
@@ -74,7 +74,7 @@ class UsersController extends Controller
             return response()->json(
                 [
                     "success" => false,
-                    "message" => "Error obtaining the games"
+                    "message" => "Error obtaining the teachers"
                 ],
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );

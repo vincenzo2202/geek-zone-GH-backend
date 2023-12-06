@@ -80,7 +80,7 @@ class UserController extends Controller
         }
     }
  
-    public function deleteUser()
+    public function deleteUser(Request $request)
     {
         try {
             $token = auth()->user();

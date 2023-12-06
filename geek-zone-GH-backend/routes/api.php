@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FeedController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Http\Request;
@@ -42,6 +43,7 @@ Route::group([
 Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
+    //TODO----------------------------->
     Route::get('/feeds', [FeedController::class, 'getAllfeeds']);
     Route::get('/feeds/{id}', [FeedController::class, 'getfeedById']);
     Route::post('/feeds', [FeedController::class, 'createFeed']);
