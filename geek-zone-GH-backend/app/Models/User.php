@@ -30,6 +30,9 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
+  
+
     // Relaciones con feed
     public  function feeds()
     {

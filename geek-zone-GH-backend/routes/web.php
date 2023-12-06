@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,6 +14,16 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/api', function (Request $request) {
+    return response()->json(
+        [
+            "success" => true,
+            "message" => "Healthcheck ok"
+        ],
+        Response::HTTP_OK
+    );
+});
 
 Route::get('/', function () {
     return view('welcome');
