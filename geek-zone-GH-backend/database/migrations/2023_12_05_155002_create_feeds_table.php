@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->string('title', 255)->nullable(false);
             $table->text('content')->nullable(false);
-            $table->string('photo', 255);   
+            $table->string('photo', 255)->nullable(true);   
             $table->unsignedBigInteger("user_id");
             $table->foreign("user_id")->references("id")->on("users")->constrained()->onDelete('cascade');
             $table->timestamp('created_at')->useCurrent();

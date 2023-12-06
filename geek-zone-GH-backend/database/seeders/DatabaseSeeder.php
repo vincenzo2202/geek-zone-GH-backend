@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             FeedSeeder::class,
         ]);
+
+        \App\Models\Feed::factory(30)->create();
     }
 
 }
