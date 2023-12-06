@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,8 +34,8 @@ Route::group([
 Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
-    Route::get('/users', [UserController::class, 'getAllUsers']); 
-    Route::get('/teachers', [UserController::class, 'getAllTeachers']);
+    Route::get('/allUsers', [UsersController::class, 'getAllUsers']); 
+    Route::get('/teachers', [UsersController::class, 'getAllTeachers']);
 });
 
 // FEEDS
