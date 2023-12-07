@@ -62,8 +62,8 @@ Route::group([
 Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
-    //TODO----------------------------->
     Route::get('/comments/{id}', [CommentController::class, 'getAllCommentsByFeedId']);  
+    //TODO----------------------------->
     Route::post('/comments', [CommentController::class, 'createCommentByFeedId']);  
     Route::delete('/comments/{id}', [CommentController::class, 'deleteCommentByFeedId']); 
 });
