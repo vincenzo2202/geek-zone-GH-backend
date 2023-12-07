@@ -32,82 +32,83 @@ class User extends Authenticatable
     ];
 
     // Relaciones con feed
-    public  function UsersToFeedOneToMany()
+    public  function feeds()
     {
         return $this->hasMany(Feed::class);
     }
 
-    public function UsersToFeedManyToManythroughComments(): BelongsToMany
+    public function feedManyToManythroughComments(): BelongsToMany
     {
-        return $this->belongsToMany(Feed::class, 'comments');
+        return $this->belongsToMany(Feed::class, 'comments', 'user_id', 'feed_id');
     }
 
-    public function UsersToFeedManyToManythroughLikes(): BelongsToMany
+    public function feedManyToManythroughLikes(): BelongsToMany
     {
-        return $this->belongsToMany(Feed::class, 'likes');
+        return $this->belongsToMany(Feed::class, 'likes', 'user_id', 'feed_id');
     }
 
-    public  function usersLikesOneToMany()
+    public  function likes()
     {
         return $this->hasMany(Like::class);
     }
 
-    public  function usersCommentsOneToMany()
+    public  function comments()
     {
         return $this->hasMany(Comment::class);
     }
 
 
     // relaciones con chat
-    public  function UsersToChatOneToMany()
+    public  function chats()
     {
         return $this->hasMany(Chat::class);
     }
 
-    public function UsersToChatManyToManythroughMessages(): BelongsToMany
+    public function chatManyToManythroughMessages(): BelongsToMany
     {
-        return $this->belongsToMany(Chat::class, 'messages');
+        return $this->belongsToMany(Chat::class, 'messages', 'user_id', 'chat_id');
     }
 
-    public function UsersToChatManyToManythroughChat_user(): BelongsToMany
+    public function chatManyToManythroughChat_user(): BelongsToMany
     {
-        return $this->belongsToMany(Chat::class, 'chat_user');
+        return $this->belongsToMany(Chat::class, 'chat_user', 'user_id', 'chat_id');
     }
 
-    public  function usersToChat_UserOneToMany()
+    public  function chat_users()
     {
         return $this->hasMany(Chat_user::class);
     }
 
-    public  function usersToMessagesOneToMany()
+    public  function messages()
     {
         return $this->hasMany(Message::class);
     }
     // Relaciones con Events
-    public  function eventsOneToMany()
+    public  function events()
     {
         return $this->hasMany(Event::class);
     }
 
-    public function usersToEventManyToManyThrougheEvent_user(): BelongsToMany
+    public function eventManyToManyThrougheEvent_user(): BelongsToMany
     {
-        return $this->belongsToMany(Event::class, 'event_user');
+        return $this->belongsToMany(Event::class, 'event_user', 'user_id', 'event_id');
     }
 
-    public  function usersToEvent_userOneToMany()
+    public  function event_users()
     {
         return $this->hasMany(Event_user::class);
     }
 
 
     // Relaciones con followers
-    public function following()
+ 
+    public function followers()
     {
-        return $this->belongsToMany(User::class, 'followers', 'following_id', 'follower_id');
+        return $this->hasMany(Follower::class, 'follower_id');
     }
 
-    public function follower()
+    public function followings()
     {
-        return $this->belongsToMany(User::class,  'followers', 'follower_id', 'following_id');
+        return $this->hasMany(Follower::class, 'following_id');
     }
 }

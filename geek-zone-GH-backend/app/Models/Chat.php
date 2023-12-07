@@ -23,27 +23,27 @@ class Chat extends Model
         'remember_token',
     ];
 
-    public function chatToUserManyToOne()
+    public function user()
     {
         return $this->belongsTo(User::class); 
     }
 
-    public function chatToUsersManyToManythroughMessages():BelongsToMany
+    public function usersManyToManythroughMessages():BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'messages');
+        return $this->belongsToMany(User::class, 'messages', 'chat_id', 'user_id');
     }
 
-    public function chatToUsersManyToManythroughChat_user():BelongsToMany
+    public function usersManyToManythroughChat_user():BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'chat_user');
+        return $this->belongsToMany(User::class, 'chat_user', 'chat_id', 'user_id');
     }
 
-    public  function chatToChat_UserOneToMany()
+    public  function chat_users()
     {
         return $this->hasMany(Chat_user::class);
     }
 
-    public  function chatToMessagesOneToMany()
+    public  function messages()
     {
         return $this->hasMany(Message::class);
     }

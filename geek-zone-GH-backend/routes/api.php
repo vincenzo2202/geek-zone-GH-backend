@@ -43,10 +43,8 @@ Route::group([
 Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
-    Route::get('/feeds', [FeedController::class, 'getAllfeeds']);
-    // TODO----------- POR HACER/ ESTE FALTARIA POR HACER
-    Route::get('/feeds/profile', [FeedController::class, 'getMyFeed']); 
-    //************* */
+    Route::get('/feeds', [FeedController::class, 'getAllfeeds']); 
+    Route::get('/feeds/profile', [FeedController::class, 'getMyFeed']);  
     Route::get('/feeds/{id}', [FeedController::class, 'getfeedById']);
     Route::post('/createFeed', [FeedController::class, 'createFeed']);
     Route::put('/updateFeed', [FeedController::class, 'updateFeed']);

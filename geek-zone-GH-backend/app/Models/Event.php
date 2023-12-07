@@ -26,17 +26,17 @@ class Event extends Model
         'remember_token',
     ];
 
-    public function userManyToOne()
+    public function user()
     {
         return $this->belongsTo(User::class); 
     }
 
     public function eventToUserManyToManyThrougheEvent_user(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'event_user');
+        return $this->belongsToMany(User::class, 'event_user', 'event_id', 'user_id');
     }
 
-    public  function EventToEvent_userOneToMany()
+    public  function event_users()
     {
         return $this->hasMany(Event_user::class);
     }

@@ -26,26 +26,26 @@ class Feed extends Model
     ];
 
     // Relaciones con user
-    public  function feedToUserManyToOne() {
+    public  function user() {
         return $this->belongsTo(User::class);
     }
 
-    public function feedsToUsersManyToManythroughComments(): BelongsToMany
+    public function usersManyToManythroughComments(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'comments');
+        return $this->belongsToMany(User::class, 'comments','feed_id', 'user_id');
     }
 
-    public function feedsToUsersManyToManythroughLikes(): BelongsToMany
+    public function usersManyToManythroughLikes(): BelongsToMany
     {
-        return $this->belongsToMany(User::class, 'likes');
+        return $this->belongsToMany(User::class, 'likes','feed_id', 'user_id');
     }
 
-    public  function feedLikesOneToMany()
+    public  function likes()
     {
         return $this->hasMany(Like::class);
     }
 
-    public  function feedCommentsOneToMany()
+    public  function comments()
     {
         return $this->hasMany(Comment::class);
     }
