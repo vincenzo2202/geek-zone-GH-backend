@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FeedController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsersController;
@@ -36,8 +37,7 @@ Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
     Route::get('/allUsers', [UsersController::class, 'getAllUsers']); 
-    Route::get('/teachers', [UsersController::class, 'getAllTeachers']);
-    //TODO----------------------------->
+    Route::get('/teachers', [UsersController::class, 'getAllTeachers']); 
     Route::get('user/{id}', [UsersController::class, 'getUserById']);// obtener un usuario por id
 });
 
@@ -50,13 +50,13 @@ Route::group([
     Route::get('/feeds/{id}', [FeedController::class, 'getfeedsByUserId']); //obtener las publicaciones por id del usuario
     Route::post('/createFeed', [FeedController::class, 'createFeed']);// crear publicacion
     Route::put('/updateFeed', [FeedController::class, 'updateFeed']);// actualizar publicacion
-    //TODO----------------------------->
     Route::delete('/deleteFeed/{id}', [FeedController::class, 'deleteFeed']);// eliminar publicacion
 });
 //COMMENTS
 Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
+    //TODO----------------------------->
     Route::get('/comments/{id}', [CommentController::class, 'getAllCommentsByFeedId']);  
     Route::post('/comments', [CommentController::class, 'createCommentByFeedId']);  
     Route::delete('/comments/{id}', [CommentController::class, 'deleteCommentByFeedId']); 
