@@ -25,18 +25,29 @@ class Feed extends Model
         'remember_token',
     ];
 
-    public  function user() {
+    // Relaciones con user
+    public  function feedToUserManyToOne() {
         return $this->belongsTo(User::class);
     }
 
-    public function commentsToUser(): BelongsToMany
+    public function feedsToUsersManyToManythroughComments(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'comments');
     }
 
-    public function likesToUser(): BelongsToMany
+    public function feedsToUsersManyToManythroughLikes(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'likes');
+    }
+
+    public  function feedLikesOneToMany()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public  function feedCommentsOneToMany()
+    {
+        return $this->hasMany(Comment::class);
     }
 
 

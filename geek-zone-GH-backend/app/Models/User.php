@@ -32,45 +32,74 @@ class User extends Authenticatable
     ];
 
     // Relaciones con feed
-    public  function feeds()
+    public  function UsersToFeedOneToMany()
     {
         return $this->hasMany(Feed::class);
     }
 
-    public function commentsToFeed(): BelongsToMany
+    public function UsersToFeedManyToManythroughComments(): BelongsToMany
     {
         return $this->belongsToMany(Feed::class, 'comments');
     }
 
-    public function likesToFeed(): BelongsToMany
+    public function UsersToFeedManyToManythroughLikes(): BelongsToMany
     {
         return $this->belongsToMany(Feed::class, 'likes');
     }
+
+    public  function usersLikesOneToMany()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+    public  function usersCommentsOneToMany()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+
     // relaciones con chat
-    public  function chats()
+    public  function UsersToChatOneToMany()
     {
         return $this->hasMany(Chat::class);
     }
 
-    public function messageTochat(): BelongsToMany
+    public function UsersToChatManyToManythroughMessages(): BelongsToMany
     {
         return $this->belongsToMany(Chat::class, 'messages');
     }
 
-    public function Chat_UserToChat(): BelongsToMany
+    public function UsersToChatManyToManythroughChat_user(): BelongsToMany
     {
         return $this->belongsToMany(Chat::class, 'chat_user');
     }
+
+    public  function usersToChat_UserOneToMany()
+    {
+        return $this->hasMany(Chat_user::class);
+    }
+
+    public  function usersToMessagesOneToMany()
+    {
+        return $this->hasMany(Message::class);
+    }
     // Relaciones con Events
-    public  function events()
+    public  function eventsOneToMany()
     {
         return $this->hasMany(Event::class);
     }
 
-    public function event_userToEvent(): BelongsToMany
+    public function usersToEventManyToManyThrougheEvent_user(): BelongsToMany
     {
         return $this->belongsToMany(Event::class, 'event_user');
     }
+
+    public  function usersToEvent_userOneToMany()
+    {
+        return $this->hasMany(Event_user::class);
+    }
+
+
     // Relaciones con followers
     public function following()
     {

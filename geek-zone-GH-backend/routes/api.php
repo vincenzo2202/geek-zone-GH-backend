@@ -44,6 +44,9 @@ Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
     Route::get('/feeds', [FeedController::class, 'getAllfeeds']);
+    // TODO----------- POR HACER/ ESTE FALTARIA POR HACER
+    Route::get('/feeds/profile', [FeedController::class, 'getMyFeed']); 
+    //************* */
     Route::get('/feeds/{id}', [FeedController::class, 'getfeedById']);
     Route::post('/createFeed', [FeedController::class, 'createFeed']);
     Route::put('/updateFeed', [FeedController::class, 'updateFeed']);
@@ -54,15 +57,15 @@ Route::group([
 Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
-    Route::get('/comments', [CommentController::class, 'getAllComments']); 
-    Route::post('/comments', [CommentController::class, 'createComment']); 
-    Route::delete('/comments/{id}', [CommentController::class, 'deleteComment']);
+    Route::get('/comments', [CommentController::class, 'getAllComments']); // BYFEEDID
+    Route::post('/comments', [CommentController::class, 'createComment']); //CREATECOMMENTINFEED
+    Route::delete('/comments/{id}', [CommentController::class, 'deleteComment']);//DELETECOMMENTINFEED
 });
 // LIKES
 Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
-    Route::get('/likes', [LikeController::class, 'getAllLikes']);
+    Route::get('/likes', [LikeController::class, 'getAllLikes']);//GETALLLIKEINFEED
     Route::get('/likes/{id}', [LikeController::class, 'getLikeById']);
     Route::post('/likes', [LikeController::class, 'createLike']); 
     Route::delete('/likes/{id}', [LikeController::class, 'deleteLike']);
