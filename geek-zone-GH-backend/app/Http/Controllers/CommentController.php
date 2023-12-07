@@ -14,7 +14,7 @@ class CommentController extends Controller
     public function getAllCommentsByFeedId(Request $request, $id)
     {
         try { 
-            $comments = Comment::query()->where('feed_id', $id)->get();
+            $comments = Comment::query()->where('feed_id', $id)->paginate(5);
 
             if($comments->isEmpty()){
                 return response()->json(
@@ -40,7 +40,7 @@ class CommentController extends Controller
             return response()->json(
                 [
                     "success" => false,
-                    "message" => "Error deleting post"
+                    "message" => "Error obtaining the comments"
                 ],
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );
