@@ -37,45 +37,46 @@ Route::group([
 ], function () {
     Route::get('/allUsers', [UsersController::class, 'getAllUsers']); 
     Route::get('/teachers', [UsersController::class, 'getAllTeachers']);
+    //TODO----------------------------->
+    Route::get('user/{id}', [UsersController::class, 'getUserById']);
 });
 
 // FEEDS
 Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
-    Route::get('/feeds', [FeedController::class, 'getAllfeeds']); 
-    Route::get('/feeds/profile', [FeedController::class, 'getMyFeed']);  
-    Route::get('/feeds/{id}', [FeedController::class, 'getfeedById']);
-    Route::post('/createFeed', [FeedController::class, 'createFeed']);
-    Route::put('/updateFeed', [FeedController::class, 'updateFeed']);
+    Route::get('/feeds', [FeedController::class, 'getAllfeeds']); //obtener todos las publicaciones
+    Route::get('/feeds/profile', [FeedController::class, 'getMyFeed']);  //obtener todas las publicaciones de mi perfil
+    Route::get('/feeds/{id}', [FeedController::class, 'getfeedsByUserId']); //obtener las publicaciones por id del usuario
+    Route::post('/createFeed', [FeedController::class, 'createFeed']);// crear publicacion
+    Route::put('/updateFeed', [FeedController::class, 'updateFeed']);// actualizar publicacion
     //TODO----------------------------->
-    Route::delete('/deleteFeed/{id}', [FeedController::class, 'deleteFeed']);
+    Route::delete('/deleteFeed/{id}', [FeedController::class, 'deleteFeed']);// eliminar publicacion
 });
 //COMMENTS
 Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
-    Route::get('/comments', [CommentController::class, 'getAllComments']); // BYFEEDID
-    Route::post('/comments', [CommentController::class, 'createComment']); //CREATECOMMENTINFEED
-    Route::delete('/comments/{id}', [CommentController::class, 'deleteComment']);//DELETECOMMENTINFEED
+    Route::get('/comments/{id}', [CommentController::class, 'getAllCommentsByFeedId']);  
+    Route::post('/comments', [CommentController::class, 'createCommentByFeedId']);  
+    Route::delete('/comments/{id}', [CommentController::class, 'deleteCommentByFeedId']); 
 });
 // LIKES
 Route::group([
     'middleware' => ['auth:sanctum']
-], function () {
-    Route::get('/likes', [LikeController::class, 'getAllLikes']);//GETALLLIKEINFEED
-    Route::get('/likes/{id}', [LikeController::class, 'getLikeById']);
-    Route::post('/likes', [LikeController::class, 'createLike']); 
-    Route::delete('/likes/{id}', [LikeController::class, 'deleteLike']);
+], function () { 
+    Route::get('/likes/{id}', [LikeController::class, 'getLikesByFeedId']);
+    Route::post('/likes', [LikeController::class, 'createLikeByFeedId']); 
+    Route::delete('/likes/{id}', [LikeController::class, 'deleteLikeByFeedId']);
 });
 
 // CHATS
 Route::group([
     'middleware' => ['auth:sanctum']
 ], function () { 
-    Route::get('/chats', [ChatController::class, 'getAllChats']);
+    Route::get('/chats', [ChatController::class, 'getAllMyChats']);
     Route::get('/chats/{id}', [ChatController::class, 'getChatById']);
-    Route::post('/chats', [ChatController::class, 'createChat']);
+    Route::post('/chats', [ChatController::class, 'createChat']);//create chat with someone // hacer atach con el usuario que queremos incluir en el chat
     Route::delete('/chats/{id}', [ChatController::class, 'deleteChat']);
 });
 
@@ -83,54 +84,44 @@ Route::group([
 Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
-    Route::get('/messages', [MessageController::class, 'getAllMessages']);
-    Route::post('/messages', [MessageController::class, 'createMessage']);
-    Route::delete('/messages/{id}', [MessageController::class, 'deleteMessage']);
-});
-//CHAT_USER
-Route::group([
-    'middleware' => ['auth:sanctum']
-], function () {
-    Route::get('/chat_user', [ChatUserController::class, 'getAllChatUsers']);
-    Route::post('/chat_user', [ChatUserController::class, 'createChatUser']);
-    Route::delete('/chat_user/{id}', [ChatUserController::class, 'deleteChatUser']);
-});
-
+    Route::get('/messages/{id}', [MessageController::class, 'getAllMessagesByChatId']);
+    Route::post('/messages', [MessageController::class, 'createMessageByChatId']);
+    Route::delete('/messages/{id}', [MessageController::class, 'deleteMessageByChatId']);
+}); 
 
 //FOLLOWERS     
 Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
-    Route::get('/followers', [FollowerController::class, 'getAllFollowers']);
-    Route::get('/followers/{id}', [FollowerController::class, 'getFollowerById']);
-    Route::post('/followers', [FollowerController::class, 'createFollower']);
-    Route::put('/followers', [FollowerController::class, 'updateFollower']);
+    Route::get('/followings',[FollowerController::class, 'getAllMyFollowings']);
+    Route::get('/followings/{id}', [FollowerController::class, 'getFollowingsByUserId']);
+    Route::get('/followers',[FollowerController::class, 'getAllMyFollowers']);
+    Route::get('/followers/{id}', [FollowerController::class, 'getFollowersByUserId']); //obtener todos los seguidores de un usuario
+    Route::post('/followers', [FollowerController::class, 'createFollower']);// empiza a seguir a alguien 
     Route::delete('/followers/{id}', [FollowerController::class, 'deleteFollower']);
-});
-//ADMIN
-
-Route::group([
-    'middleware' => ['auth:sanctum']
-], function () { 
-    Route::post('/event_user', [EventUserController::class, 'createEventUser']);
 });
 
 // EVENTS
 Route::group([ 
-    'middleware' => ['auth:sanctum']
+    'middleware' => ['auth:sanctum', 'role:admin']
 ], function () {
-    Route::get('/events', [EventController::class, 'getAllEvents']);
     Route::post('/events', [EventController::class, 'createEvent']);
-    Route::put('/events', [EventController::class, 'updateEvent']);
+    // Route::put('/events', [EventController::class, 'updateEvent']);//future
     Route::delete('/events/{id}', [EventController::class, 'deleteEvent']);
+});
+Route::group([
+    'middleware' => ['auth:sanctum']
+], function () { 
+    Route::get('/events', [EventController::class, 'getAllEvents']);//obtener todos los eventos
 });
 
 // EVENT_USER
 Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
-    Route::get('/event_user', [EventUserController::class, 'getAllEventUsers']);
-    Route::delete('/event_user/{id}', [EventUserController::class, 'deleteEventUser']);
+    Route::post('/event_user', [EventUserController::class, 'createEventUser']);// asistir a un evento
+    Route::get('/event_user/{id}', [EventUserController::class, 'getAllEventUsersByEventId']);//ver todos los asistentes a un evento especifico
+    Route::delete('/event_user/{id}', [EventUserController::class, 'deleteEventUser']);// dejar de asistir a un evento
 });
 
 
@@ -138,6 +129,6 @@ Route::group([
 Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
-    Route::get('/users', [UserController::class, 'DeleteUser']);
-    Route::post('/event_user', [EventUserController::class, 'createEventUser']);
+    Route::get('/users', [UserController::class, 'deleteUser']); //borrar un usuario
+    Route::put('changeRole', [UserController::class, 'changeRole']);// cambiar el rol de un usuario
 });
