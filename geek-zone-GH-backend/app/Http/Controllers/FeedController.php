@@ -84,7 +84,7 @@ class FeedController extends Controller
         }
     }
 
-    public function getfeedById(Request $request, $id)
+    public function getfeedsByUserId(Request $request, $id)
     {
         try {
             $feeds = Feed::query()->where('user_id', $id)->get();

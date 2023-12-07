@@ -38,7 +38,7 @@ Route::group([
     Route::get('/allUsers', [UsersController::class, 'getAllUsers']); 
     Route::get('/teachers', [UsersController::class, 'getAllTeachers']);
     //TODO----------------------------->
-    Route::get('user/{id}', [UsersController::class, 'getUserById']);
+    Route::get('user/{id}', [UsersController::class, 'getUserById']);// obtener un usuario por id
 });
 
 // FEEDS
