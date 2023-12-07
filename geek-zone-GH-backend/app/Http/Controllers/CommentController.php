@@ -115,6 +115,55 @@ class CommentController extends Controller
         return $validator;
     }
 
+    public function deleteCommentByFeedId(Request $request, $id)
+    {
+        try {
+            $user = auth()->user();
+            $comment = Comment::query()->where('id', $id)->first();
+
+            if (!$comment) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "Comment not found"
+                    ],
+                    Response::HTTP_NOT_FOUND
+                );
+            }
+
+            if ($comment->user_id != $user->id) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "You are not allowed to delete this comment"
+                    ],
+                    Response::HTTP_UNAUTHORIZED
+                );
+            }
+
+            Comment::destroy($comment->id);
+
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Comment deleted succesfully",
+                    "data" => $comment
+                ],
+                Response::HTTP_OK
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error deleting the comment"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
 }
 
 
