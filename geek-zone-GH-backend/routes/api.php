@@ -81,8 +81,11 @@ Route::group([
 ], function () { 
     //TODO----------------------------->
     Route::get('/chats', [ChatController::class, 'getAllMyChats']);
+    //TODO----------------------------->
     Route::get('/chats/{id}', [ChatController::class, 'getChatById']);
+    //TODO----------------------------->
     Route::post('/chats', [ChatController::class, 'createChat']);//create chat with someone // hacer atach con el usuario que queremos incluir en el chat
+    //TODO----------------------------->
     Route::delete('/chats/{id}', [ChatController::class, 'deleteChat']);
 });
 
@@ -90,8 +93,11 @@ Route::group([
 Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
+    //TODO----------------------------->
     Route::get('/messages/{id}', [MessageController::class, 'getAllMessagesByChatId']);
+    //TODO----------------------------->
     Route::post('/messages', [MessageController::class, 'createMessageByChatId']);
+    //TODO----------------------------->
     Route::delete('/messages/{id}', [MessageController::class, 'deleteMessageByChatId']);
 }); 
 
