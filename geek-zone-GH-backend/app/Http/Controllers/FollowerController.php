@@ -246,4 +246,64 @@ class FollowerController extends Controller
             );
         }
     }
+
+    public function createFollower(Request $request)
+    {
+        try {
+            $user = auth()->user();
+            $newFollower = $request->input('following_id');
+
+            $followings = Follower::query()
+                ->with(['following'])
+                ->where('follower_id', $user->id)
+                ->where('following_id', $newFollower)
+                ->first();
+
+            if ($followings) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "You are already following this user",
+                    ],
+                    Response::HTTP_OK
+                );
+            }
+
+            $createFollower = Follower::query()->create([
+                'follower_id' => $user->id,
+                'following_id' => $newFollower,
+            ]);
+
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Follower created succesfully",
+                    "data" => $createFollower
+                ],
+                Response::HTTP_CREATED
+            );
+ 
+            
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error creating the follower"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        } catch (\Throwable $th) {
+           Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error creating the follower"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
 }

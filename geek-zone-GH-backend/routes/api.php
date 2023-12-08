@@ -108,8 +108,8 @@ Route::group([
     Route::get('/followings',[FollowerController::class, 'getAllMyFollowings']);
     Route::get('/followings/{id}', [FollowerController::class, 'getFollowingsByUserId']);
     Route::get('/followers',[FollowerController::class, 'getAllMyFollowers']);
-    //TODO----------------------------->aqui
     Route::get('/followers/{id}', [FollowerController::class, 'getFollowersByUserId']); //obtener todos los seguidores de un usuario
+    //TODO----------------------------->aqui
     Route::post('/followers', [FollowerController::class, 'createFollower']);// empiza a seguir a alguien 
     Route::delete('/followers/{id}', [FollowerController::class, 'deleteFollower']);
 });
