@@ -143,6 +143,6 @@ Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
     //TODO----------------------------->aqui
-    Route::delete('/deleteOneBySuper', [SuperAdminController::class,'deleteOneBySuper']); //borrar un usuario
+    Route::delete('/deleteOneBySuper/{id}', [SuperAdminController::class, 'deleteOneBySuper']); //borrar un usuario
     Route::put('/changeRole', [SuperAdminController::class, 'changeRole']);// cambiar el rol de un usuario
 });
