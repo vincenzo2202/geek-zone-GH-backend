@@ -117,9 +117,9 @@ Route::group([
 Route::group([ 
     'middleware' => ['auth:sanctum' , 'is_admin' ]
 ], function () {
-    //TODO----------------------------->aqui
     Route::post('/events/create', [EventController::class, 'createEvent']);
     // Route::put('/events', [EventController::class, 'updateEvent']);//future
+    //TODO----------------------------->aqui
     Route::delete('/events/{id}', [EventController::class, 'deleteEvent']);
 });
 Route::group([

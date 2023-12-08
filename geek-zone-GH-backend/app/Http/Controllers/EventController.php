@@ -71,4 +71,54 @@ class EventController extends Controller
 
         return $validator;
     }
+
+    public function deleteEvent(Request $request, $id)
+    {
+        try {
+            $user = auth()->user();
+            $event = Event::query()->find($id);
+
+            if (!$event) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "Event not found"
+                    ],
+                    Response::HTTP_NOT_FOUND
+                );
+            }
+
+            if ($user->id != $event->user_id) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "Unauthorized"
+                    ],
+                    Response::HTTP_UNAUTHORIZED
+                );
+            } 
+            
+            Event::destroy($id);
+
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Event deleted"
+                ],
+                Response::HTTP_OK
+            );
+
+        } catch (\Throwable $th) {
+           Log::error($th->getMessage());
+
+           return response()->json(
+               [
+                   "success" => false,
+                   "message" => "Error deleting event",
+                   "error" => $th->getMessage()
+               ],
+               Response::HTTP_BAD_REQUEST
+           );
+        }
+    }
 }
