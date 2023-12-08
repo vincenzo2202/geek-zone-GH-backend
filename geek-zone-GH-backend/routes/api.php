@@ -110,15 +110,15 @@ Route::group([
     Route::get('/followers',[FollowerController::class, 'getAllMyFollowers']);
     Route::get('/followers/{id}', [FollowerController::class, 'getFollowersByUserId']); //obtener todos los seguidores de un usuario
     Route::post('/followers', [FollowerController::class, 'createFollower']);// empiza a seguir a alguien 
-    //TODO----------------------------->aqui
     Route::delete('/followers/{id}', [FollowerController::class, 'deleteFollower']);
 });
 
 // EVENTS
 Route::group([ 
-    'middleware' => ['auth:sanctum', 'role:admin']
+    'middleware' => ['auth:sanctum' , 'is_admin' ]
 ], function () {
-    Route::post('/events', [EventController::class, 'createEvent']);
+    //TODO----------------------------->aqui
+    Route::post('/events/create', [EventController::class, 'createEvent']);
     // Route::put('/events', [EventController::class, 'updateEvent']);//future
     Route::delete('/events/{id}', [EventController::class, 'deleteEvent']);
 });
