@@ -72,7 +72,6 @@ Route::group([
 ], function () { 
     Route::get('/likes/{id}', [LikeController::class, 'getLikesByFeedId']);
     Route::post('/like', [LikeController::class, 'createLikeByFeedId']); 
-    //TODO----------------------------->
     Route::delete('/like/{id}', [LikeController::class, 'deleteLikeByFeedId']);
 });
 
@@ -80,6 +79,7 @@ Route::group([
 Route::group([
     'middleware' => ['auth:sanctum']
 ], function () { 
+    //TODO----------------------------->
     Route::get('/chats', [ChatController::class, 'getAllMyChats']);
     Route::get('/chats/{id}', [ChatController::class, 'getChatById']);
     Route::post('/chats', [ChatController::class, 'createChat']);//create chat with someone // hacer atach con el usuario que queremos incluir en el chat
