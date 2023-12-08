@@ -64,13 +64,13 @@ Route::group([
 ], function () {
     Route::get('/comments/{id}', [CommentController::class, 'getAllCommentsByFeedId']);  
     Route::post('/comments', [CommentController::class, 'createCommentByFeedId']);  
-    //TODO----------------------------->
     Route::delete('/comments/{id}', [CommentController::class, 'deleteCommentByFeedId']); 
 });
 // LIKES
 Route::group([
     'middleware' => ['auth:sanctum']
 ], function () { 
+    //TODO----------------------------->
     Route::get('/likes/{id}', [LikeController::class, 'getLikesByFeedId']);
     Route::post('/likes', [LikeController::class, 'createLikeByFeedId']); 
     Route::delete('/likes/{id}', [LikeController::class, 'deleteLikeByFeedId']);
