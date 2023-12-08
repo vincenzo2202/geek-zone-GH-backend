@@ -106,6 +106,7 @@ Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
     Route::get('/followings',[FollowerController::class, 'getAllMyFollowings']);
+    //TODO----------------------------->aqui
     Route::get('/followings/{id}', [FollowerController::class, 'getFollowingsByUserId']);
     Route::get('/followers',[FollowerController::class, 'getAllMyFollowers']);
     Route::get('/followers/{id}', [FollowerController::class, 'getFollowersByUserId']); //obtener todos los seguidores de un usuario
