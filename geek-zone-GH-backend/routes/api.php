@@ -119,12 +119,12 @@ Route::group([
 ], function () {
     Route::post('/events/create', [EventController::class, 'createEvent']);
     // Route::put('/events', [EventController::class, 'updateEvent']);//future
-    //TODO----------------------------->aqui
     Route::delete('/events/{id}', [EventController::class, 'deleteEvent']);
 });
 Route::group([
     'middleware' => ['auth:sanctum']
 ], function () { 
+    //TODO----------------------------->aqui
     Route::get('/events', [EventController::class, 'getAllEvents']);//obtener todos los eventos
 });
 

@@ -96,8 +96,8 @@ class EventController extends Controller
                     ],
                     Response::HTTP_UNAUTHORIZED
                 );
-            } 
-            
+            }
+
             Event::destroy($id);
 
             return response()->json(
@@ -107,18 +107,53 @@ class EventController extends Controller
                 ],
                 Response::HTTP_OK
             );
-
         } catch (\Throwable $th) {
-           Log::error($th->getMessage());
+            Log::error($th->getMessage());
 
-           return response()->json(
-               [
-                   "success" => false,
-                   "message" => "Error deleting event",
-                   "error" => $th->getMessage()
-               ],
-               Response::HTTP_BAD_REQUEST
-           );
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error deleting event",
+                    "error" => $th->getMessage()
+                ],
+                Response::HTTP_BAD_REQUEST
+            );
+        }
+    }
+
+    public function getAllEvents(Request $request)
+    {
+        try {
+            $events = Event::query()->get();
+
+            if ($events->isEmpty()) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "No events found"
+                    ],
+                    Response::HTTP_NOT_FOUND
+                );
+            }
+
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Events",
+                    "data" => $events
+                ],
+                Response::HTTP_OK
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error getting events",
+                    "error" => $th->getMessage()
+                ],
+                Response::HTTP_BAD_REQUEST
+            );
         }
     }
 }
