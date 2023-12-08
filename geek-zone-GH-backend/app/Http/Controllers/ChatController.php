@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chat;
+use App\Models\Chat_user;
 use App\Models\Comment;
 use App\Models\Feed;
 use App\Models\User;
@@ -12,12 +13,17 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Validator;
 
 class ChatController extends Controller
+// solo trae mis chats por el id del token y el nombre del chat pero no trae los usuarios con los que tengo chat
+// TODO necesito que traiga tambien a los usiarios con los que tengo chat
 {
     public function getAllMyChats(Request $request)
     {
         try {
             $user = auth()->user();
-            $myChats = Chat::query()->where('user_id', $user->id)->paginate(10);
+            $myChats = Chat_user::query()
+            ->where('user_id', $user->id)
+            ->with(['chat', 'user'])
+            ->paginate(10);
 
             if ($myChats->isEmpty()) {
                 return response()->json(
@@ -33,7 +39,23 @@ class ChatController extends Controller
                 [
                     "success" => true,
                     "message" => "Chats obtained succesfully",
-                    "data" => $myChats// information of chats
+                    //TODO eliminar bug de la funcion map // esta funcionando
+                    "data" => $myChats->map(function ($chatUser) {
+                        return [
+                            'id' => $chatUser->id,
+                            'chat_id' => $chatUser->chat_id,
+                            'user_id' => $chatUser->user_id, 
+                            'created_at' => $chatUser->created_at,
+                            'updated_at' => $chatUser->updated_at,
+                            'chat' => [
+                                'name' => $chatUser->chat->name,
+                            ],
+                            'user' => [
+                                'name' => $chatUser->user->name,
+                                'last_name' => $chatUser->user->last_name,
+                            ],
+                        ];
+                    })
                 ],
                 Response::HTTP_OK
             );
