@@ -252,7 +252,6 @@ class FollowerController extends Controller
         try {
             $user = auth()->user();
             $newFollower = $request->input('following_id');
-
             $followings = Follower::query()
                 ->with(['following'])
                 ->where('follower_id', $user->id)
@@ -301,6 +300,47 @@ class FollowerController extends Controller
                 [
                     "success" => false,
                     "message" => "Error creating the follower"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
+    public function deleteFollower(Request $request, $id)
+    {
+        try {
+            $user = auth()->user();
+            $follower = Follower::query()
+                ->where('follower_id', $user->id)
+                ->where('following_id', $id)
+                ->first();
+
+            if (!$follower) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "You are not following this user",
+                    ],
+                    Response::HTTP_OK
+                );
+            }
+
+            Follower::destroy($follower->id);
+
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Follower deleted succesfully",
+                ],
+                Response::HTTP_OK
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error deleting the follower"
                 ],
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );
