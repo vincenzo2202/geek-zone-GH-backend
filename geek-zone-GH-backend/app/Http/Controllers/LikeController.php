@@ -53,4 +53,48 @@ class LikeController extends Controller
         );
     }
    }
+
+   public function createLikeByFeedId(Request $request)
+   {
+    try {
+       $user = auth()->user();
+       $feed = Feed::query()->where('id', $request->feed_id)->first();
+
+       if(!$feed){
+           return response()->json(
+               [
+                   "success" => false,
+                   "message" => "Feed not found"
+               ],
+               Response::HTTP_NOT_FOUND
+           );
+       }
+
+       $like = Like::query()->create([
+           'user_id' => $user->id,
+           'feed_id' => $request->input('feed_id'),
+       ]);
+
+       return response()->json(
+           [
+               "success" => true,
+               "message" => "Like created succesfully",
+               "data" => $like
+           ],
+           Response::HTTP_OK
+       );
+
+       
+    } catch (\Throwable $th) {
+       Log::error($th->getMessage());
+
+         return response()->json(
+              [
+                "success" => false,
+                "message" => "Error creating the like"
+              ],
+              Response::HTTP_INTERNAL_SERVER_ERROR
+         );
+    }
+   }
 }
