@@ -9,6 +9,7 @@ use App\Http\Controllers\FeedController;
 use App\Http\Controllers\FollowerController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Http\Request;
@@ -133,7 +134,6 @@ Route::group([
 ], function () {
     Route::post('/event_user', [EventUserController::class, 'createEventUser']);// asistir a un evento
     Route::get('/event_user/{id}', [EventUserController::class, 'getAllEventUsersByEventId']);//ver todos los asistentes a un evento especifico
-    //TODO----------------------------->aqui
     Route::delete('/event_user/{id}', [EventUserController::class, 'deleteEventUser']);// dejar de asistir a un evento
 });
 
@@ -142,6 +142,7 @@ Route::group([
 Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
-    Route::get('/users', [UserController::class, 'deleteUser']); //borrar un usuario
-    Route::put('changeRole', [UserController::class, 'changeRole']);// cambiar el rol de un usuario
+    //TODO----------------------------->aqui
+    Route::delete('/deleteOneBySuper', [SuperAdminController::class,'deleteOneBySuper']); //borrar un usuario
+    Route::put('/changeRole', [SuperAdminController::class, 'changeRole']);// cambiar el rol de un usuario
 });
