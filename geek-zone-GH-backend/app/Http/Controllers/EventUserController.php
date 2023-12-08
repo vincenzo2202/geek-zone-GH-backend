@@ -119,4 +119,46 @@ class EventUserController extends Controller
          );
     }
    }
+
+   public function deleteEventUser(Request $request, $id)
+   {
+    try {
+        $user = auth()->user();
+        $event = Event_user::query()
+        ->where('event_id', $id)
+        ->where('user_id', $user->id)
+        ->first();
+
+        if(!$event){
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "You are not registered for this event"
+                ],
+                Response::HTTP_OK
+            );
+        }
+
+        Event_user::destroy($event->id);
+
+        return response()->json(
+            [
+                "success" => true,
+                "message" => "Event deleted"
+            ],
+            Response::HTTP_OK
+        );
+    } catch (\Throwable $th) {
+        Log::error($th->getMessage());
+
+        return response()->json(
+            [
+                "success" => false,
+                "message" => "Error deleting event",
+                "error" => $th->getMessage()
+            ],
+            Response::HTTP_BAD_REQUEST
+        );
+    }
+   }
 }
