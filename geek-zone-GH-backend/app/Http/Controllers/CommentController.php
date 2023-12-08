@@ -123,7 +123,7 @@ class CommentController extends Controller
     {
         try {
             $user = auth()->user();
-            $comment = Comment::query()->where('id', $id)->first();
+            $comment = Comment::query()->find($id);
 
             if (!$comment) {
                 return response()->json(

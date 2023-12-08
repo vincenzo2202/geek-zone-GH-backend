@@ -124,7 +124,6 @@ Route::group([
 Route::group([
     'middleware' => ['auth:sanctum']
 ], function () { 
-    //TODO----------------------------->aqui
     Route::get('/events', [EventController::class, 'getAllEvents']);//obtener todos los eventos
 });
 
@@ -132,6 +131,7 @@ Route::group([
 Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
+    //TODO----------------------------->aqui
     Route::post('/event_user', [EventUserController::class, 'createEventUser']);// asistir a un evento
     Route::get('/event_user/{id}', [EventUserController::class, 'getAllEventUsersByEventId']);//ver todos los asistentes a un evento especifico
     Route::delete('/event_user/{id}', [EventUserController::class, 'deleteEventUser']);// dejar de asistir a un evento
