@@ -88,6 +88,7 @@ class FollowerController extends Controller
                 );
             }
 
+
             $formattedFollowings = $followings->map(function ($following) {
                 return [
                     'id' => $following->id,
@@ -118,6 +119,62 @@ class FollowerController extends Controller
                 [
                     "success" => false,
                     "message" => "Error obtaining the followings"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
+    public function getAllMyFollowers(Request $request)
+    {
+        try {
+           $user = auth()->user();
+            $followers = Follower::query()
+                ->with(['follower'])
+                ->where('following_id', $user->id)
+                ->get();
+            $followersCount = sizeof($followers);
+
+            if ($followers->isEmpty()) {
+                return response()->json(
+                    [
+                        "success" => true,
+                        "message" => "There are not any followers to show",
+                    ],
+                    Response::HTTP_OK
+                );
+            }
+
+            $formattedFollowers = $followers->map(function ($follower) {
+                return [
+                    'id' => $follower->id,
+                    'follower_id' => $follower->follower_id,
+                    'following_id' => $follower->following_id,
+                    'created_at' => $follower->created_at,
+                    'updated_at' => $follower->updated_at,
+                    'follower' => [
+                        'name' => $follower->follower->name,
+                        'last_name' => $follower->follower->last_name,
+                        'photo' => $follower->follower->photo,
+                    ],
+                ];
+            });
+
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Followers obtained succesfully",
+                    "dataSize" => $followersCount, // cuantity of followers
+                    "data" => $formattedFollowers // information of followers
+                ],
+                Response::HTTP_OK
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error obtaining the followers"
                 ],
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );
