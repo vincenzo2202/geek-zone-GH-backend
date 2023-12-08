@@ -71,9 +71,9 @@ Route::group([
     'middleware' => ['auth:sanctum']
 ], function () { 
     Route::get('/likes/{id}', [LikeController::class, 'getLikesByFeedId']);
-    //TODO----------------------------->
     Route::post('/like', [LikeController::class, 'createLikeByFeedId']); 
-    Route::delete('/likes/{id}', [LikeController::class, 'deleteLikeByFeedId']);
+    //TODO----------------------------->
+    Route::delete('/like/{id}', [LikeController::class, 'deleteLikeByFeedId']);
 });
 
 // CHATS
