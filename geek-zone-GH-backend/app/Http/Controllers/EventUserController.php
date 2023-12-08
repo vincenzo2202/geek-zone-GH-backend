@@ -60,4 +60,63 @@ class EventUserController extends Controller
         );
     }
    }
+
+   public function getAllEventUsersByEventId(Request $request,$id)
+   {
+    try { 
+        $eventUsers = Event_user::query()
+        ->where('event_id', $id)
+        ->with(['user'])
+        ->get();
+
+        $count= sizeof($eventUsers);
+
+        if($eventUsers->isEmpty()){
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "There are not any users to show", 
+                ],
+                Response::HTTP_OK
+            ); 
+        }
+
+        $formatEventUsers = $eventUsers->map(function($eventUser){
+            return [
+                'id' => $eventUser->id, 
+                'user_id' => $eventUser->user->id,
+                'event_id' => $eventUser->event_id,
+                'created_at' => $eventUser->created_at, 
+                'user'=>[ 
+                    'name' => $eventUser->user->name,
+                    'last_name' => $eventUser->user->last_name,
+                    'email' => $eventUser->user->email, 
+                ]
+            ];
+        });
+
+
+
+        return response()->json(
+            [
+                "success" => true,
+                "message" => "Users obtained succesfully",
+                "dataSize" => $count,
+                "data" => $formatEventUsers
+            ],
+            Response::HTTP_OK
+        );
+  
+    } catch (\Throwable $th) {
+       Log::error($th->getMessage());
+
+         return response()->json(
+              [
+                "success" => false,
+                "message" => "Error obtaining the users"
+              ],
+              Response::HTTP_INTERNAL_SERVER_ERROR
+         );
+    }
+   }
 }

@@ -131,8 +131,8 @@ Route::group([
 Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
-    //TODO----------------------------->aqui
     Route::post('/event_user', [EventUserController::class, 'createEventUser']);// asistir a un evento
+    //TODO----------------------------->aqui
     Route::get('/event_user/{id}', [EventUserController::class, 'getAllEventUsersByEventId']);//ver todos los asistentes a un evento especifico
     Route::delete('/event_user/{id}', [EventUserController::class, 'deleteEventUser']);// dejar de asistir a un evento
 });
