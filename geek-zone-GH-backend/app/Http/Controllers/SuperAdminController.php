@@ -72,7 +72,7 @@ class SuperAdminController extends Controller
     {
         try {
             $SuperAdmin = auth()->user();
-            $user = User::query()->where('id', $id)->first();
+            $user = User::query()->find($id);
 
             if ($SuperAdmin->role != 'super_admin') {
                 return response()->json(
