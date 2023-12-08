@@ -16,6 +16,9 @@ class CommentController extends Controller
     {
         try {
             $comments = Comment::query()->where('feed_id', $id)->paginate(5);
+            $commentsArray = Comment::query()->where('feed_id', $id)->get();
+
+            $countComments = sizeof($commentsArray);
 
             if ($comments->isEmpty()) {
                 return response()->json(
@@ -31,7 +34,8 @@ class CommentController extends Controller
                 [
                     "success" => true,
                     "message" => "Comments obtained succesfully",
-                    "data" => $comments
+                    "dataSize" => $countComments, // cuantity of comments
+                    "data" => $comments // information of comments
                 ],
                 Response::HTTP_OK
             );
