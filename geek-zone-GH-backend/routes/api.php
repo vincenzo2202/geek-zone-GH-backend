@@ -80,10 +80,10 @@ Route::group([
 Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {  
+    //TODO: mirar que tambien el usuario que esta en la intermedia pero no en chat pueda obtener los chats
     Route::get('/mychats', [ChatController::class, 'getAllMyChats']); //obtener todos los chats
     Route::get('/chats/{id}', [ChatController::class, 'getChatById']);//obtener un chat por id con mensajes 
-    Route::post('/newchat', [ChatController::class, 'createChat']);//create chat with someone // hacer atach con el usuario que queremos incluir en el chat
-    //TODO----------------------------->
+    Route::post('/newchat', [ChatController::class, 'createChat']);//create chat with someone // hacer atach con el usuario que queremos incluir en el chat 
     Route::delete('/chats/{id}', [ChatController::class, 'deleteChat']);
 });
 
