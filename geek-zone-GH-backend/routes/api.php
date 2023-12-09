@@ -90,8 +90,7 @@ Route::group([
 // MESSAGES
 Route::group([
     'middleware' => ['auth:sanctum']
-], function () {
-    //TODO----------------------------->
+], function () { 
     Route::get('/messages/{id}', [MessageController::class, 'getAllMessagesByChatId']);
     //TODO----------------------------->
     Route::post('/messages', [MessageController::class, 'createMessageByChatId']);
