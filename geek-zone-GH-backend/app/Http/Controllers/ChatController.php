@@ -78,8 +78,7 @@ class ChatController extends Controller
             $user = auth()->user(); 
             $chat = Chat::query()
                 ->where('id', $id)
-                ->with('usersManyToManythroughChat_user')
-                ->with('messages')
+                ->with(['usersManyToManythroughChat_user', 'messages'])
                 ->first();
             
             if (!$chat) {

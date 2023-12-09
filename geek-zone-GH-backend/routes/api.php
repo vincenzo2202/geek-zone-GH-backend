@@ -80,9 +80,8 @@ Route::group([
 Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {  
-    Route::get('/mychats', [ChatController::class, 'getAllMyChats']);
-    //TODO----------------------------->
-    Route::get('/chats/{id}', [ChatController::class, 'getChatById']);
+    Route::get('/mychats', [ChatController::class, 'getAllMyChats']); //obtener todos los chats
+    Route::get('/chats/{id}', [ChatController::class, 'getChatById']);//obtener un chat por id con mensajes
     //TODO----------------------------->
     Route::post('/chats', [ChatController::class, 'createChat']);//create chat with someone // hacer atach con el usuario que queremos incluir en el chat
     //TODO----------------------------->
