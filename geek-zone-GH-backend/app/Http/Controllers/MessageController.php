@@ -108,9 +108,9 @@ class MessageController extends Controller
             }
 
             $messages = Chat::query()
-            ->where('id', $chat)
-            ->with('usersManyToManythroughChat_user')
-            ->get();
+                ->where('id', $chat)
+                ->with('usersManyToManythroughChat_user')
+                ->get();
 
             if ($messages->isEmpty()) {
                 return response()->json(
@@ -123,10 +123,10 @@ class MessageController extends Controller
             }
 
             $mappedMessages = $messages->map(function ($message) {
-                return [ 
+                return [
                     'members' => $message->usersManyToManythroughChat_user->map(function ($user) {
                         return  $user->id;
-                    }) 
+                    })
                 ];
             });
 
@@ -185,5 +185,54 @@ class MessageController extends Controller
         ]);
 
         return $validator;
+    }
+
+    public function deleteMessageByChatId(Request $request, $id)
+    {
+        try {
+            $user = auth()->user();
+            $message = Message::query()->find($id);
+
+            if (!$message) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "Message not found",
+                    ],
+                    Response::HTTP_BAD_REQUEST
+                );
+            }
+
+            if($message->user_id !== $user->id){
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "You are not allowed to delete this message",
+                    ],
+                    Response::HTTP_UNAUTHORIZED
+                );
+            }
+
+            Message::destroy($message->id);
+
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Message deleted succesfully",
+                ],
+                Response::HTTP_OK
+            );
+
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error deleting message",
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
     }
 }
