@@ -20,26 +20,27 @@ class MessageController extends Controller
             $user = auth()->user(); 
             $messages = Chat::query()
                 ->where('id', $id) 
-                ->with('messages', 'user')
+                ->with('messages', 'user','usersManyToManythroughChat_user')
                 ->get();
 
             if ($messages->isEmpty()) {
                 return response()->json(
                     [
                         "success" => true,
-                        "message" => "There are not any messages to show",
+                        "message" => "Chat not found",
                     ],
                     Response::HTTP_OK
                 );
             }
-
-          
 
             $mappedMessages = $messages->map(function ($message) {
                 return [
                     'id' => $message->id, 
                     'user_id' => $message->user_id,
                     'created_at' => $message->created_at, 
+                    'members' => $message->usersManyToManythroughChat_user->map(function ($user) {
+                        return  $user->id;
+                    }),
                     'messages' => $message->messages->map(function ($message) {
                         return [
                             'id' => $message->id,
@@ -50,8 +51,19 @@ class MessageController extends Controller
                             'created_at' => $message->created_at,
                         ];
                     }),
+                    
                 ];
             });
+
+            if (!$mappedMessages[0]['members']->contains($user->id)) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "You are not a member of this chat",
+                    ],
+                    Response::HTTP_OK
+                );
+            }
             
 
             return response()->json(
