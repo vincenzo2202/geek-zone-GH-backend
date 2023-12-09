@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Validator;
 
-class ChatController extends Controller 
+class ChatController extends Controller
 {
     public function getAllMyChats(Request $request)
     {
@@ -46,7 +46,7 @@ class ChatController extends Controller
                             'name' => $user->name,
                             'last_name' => $user->last_name,
                             'email' => $user->email,
-                            'photo' => $user->photo, 
+                            'photo' => $user->photo,
                         ];
                     }),
                 ];
@@ -75,12 +75,12 @@ class ChatController extends Controller
     public function getChatById(Request $request, $id)
     {
         try {
-            $user = auth()->user(); 
+            $user = auth()->user();
             $chat = Chat::query()
                 ->where('id', $id)
                 ->with(['usersManyToManythroughChat_user', 'messages'])
                 ->first();
-            
+
             if (!$chat) {
                 return response()->json(
                     [
@@ -113,12 +113,12 @@ class ChatController extends Controller
                         'name' => $user->name,
                         'last_name' => $user->last_name,
                         'email' => $user->email,
-                        'photo' => $user->photo, 
+                        'photo' => $user->photo,
                     ];
                 }),
                 'messages' => $chat->messages->map(function ($message) {
                     return [
-                        'id' => $message->id, 
+                        'id' => $message->id,
                         'user_id' => $message->user_id,
                         'message' => $message->message,
                         'created_at' => $message->created_at,
@@ -135,15 +135,76 @@ class ChatController extends Controller
                 Response::HTTP_OK
             );
         } catch (\Throwable $th) {
-           Log::error($th->getMessage());
+            Log::error($th->getMessage());
 
-              return response()->json(
+            return response()->json(
                 [
-                     "success" => false,
-                     "message" => "Error obtaining the chat"
+                    "success" => false,
+                    "message" => "Error obtaining the chat"
                 ],
                 Response::HTTP_INTERNAL_SERVER_ERROR
-              );
+            );
         }
     }
+
+    public function createChat(Request $request)
+    {
+        try {
+            $user = auth()->user(); 
+            $chatWith = $request->input('user_id'); 
+
+            $chatUser = Chat::query() 
+            ->where('user_id', $chatWith)
+            ->first();
+
+            if ($chatUser) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "You already have a chat with this user",
+                    ],
+                    Response::HTTP_BAD_REQUEST
+                );
+            }
+
+            $userName = User::query()
+                ->where('id', $chatWith)
+                ->first();
+
+            $chattingWith = Chat::create([
+                'name' => $userName->name,
+                'user_id' => $user->id,
+            ]);
+
+            $chat = Chat::create([
+                'name' => $user->name,
+                'user_id' => $chatWith,
+            ]);
+
+            //hago attach a la tabla intermedia con lo usuarios que participan en el chat
+            $chat->usersManyToManythroughChat_user()->attach($user->id, ['chat_id' => $chat->id]);
+            $chat->usersManyToManythroughChat_user()->attach($chatWith, ['chat_id' => $chat->id]);
+
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Chat created succesfully",
+                    "data" => $chattingWith,
+                ],
+                Response::HTTP_CREATED
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error creating the chat"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
+    
 }
