@@ -81,7 +81,7 @@ Route::group([
     'middleware' => ['auth:sanctum']
 ], function () { 
     //TODO----------------------------->
-    Route::get('/chats', [ChatController::class, 'getAllMyChats']);
+    Route::get('/mychats', [ChatController::class, 'getAllMyChats']);
     //TODO----------------------------->
     Route::get('/chats/{id}', [ChatController::class, 'getChatById']);
     //TODO----------------------------->
@@ -142,7 +142,6 @@ Route::group([
 Route::group([
     'middleware' => ['auth:sanctum']
 ], function () {
-    //TODO----------------------------->aqui
     Route::delete('/deleteOneBySuper/{id}', [SuperAdminController::class, 'deleteOneBySuper']); //borrar un usuario
     Route::put('/changeRole', [SuperAdminController::class, 'changeRole']);// cambiar el rol de un usuario
 });
