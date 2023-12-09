@@ -154,8 +154,9 @@ class ChatController extends Controller
             $chatName = $request->input('name');
             $chatWith = $request->input('user_id');
 
-            $chatUser = Chat::query()
+            $chatUser = Chat_user::query()
                 ->where('user_id', $chatWith)
+                ->with('chat')
                 ->first();
 
             if ($chatUser) {
