@@ -79,8 +79,7 @@ Route::group([
 // CHATS
 Route::group([
     'middleware' => ['auth:sanctum']
-], function () { 
-    //TODO----------------------------->
+], function () {  
     Route::get('/mychats', [ChatController::class, 'getAllMyChats']);
     //TODO----------------------------->
     Route::get('/chats/{id}', [ChatController::class, 'getChatById']);
