@@ -150,12 +150,13 @@ class ChatController extends Controller
     public function createChat(Request $request)
     {
         try {
-            $user = auth()->user(); 
-            $chatWith = $request->input('user_id'); 
+            $user = auth()->user();
+            $chatName = $request->input('name');
+            $chatWith = $request->input('user_id');
 
-            $chatUser = Chat::query() 
-            ->where('user_id', $chatWith)
-            ->first();
+            $chatUser = Chat::query()
+                ->where('user_id', $chatWith)
+                ->first();
 
             if ($chatUser) {
                 return response()->json(
@@ -166,19 +167,10 @@ class ChatController extends Controller
                     Response::HTTP_BAD_REQUEST
                 );
             }
-
-            $userName = User::query()
-                ->where('id', $chatWith)
-                ->first();
-
-            $chattingWith = Chat::create([
-                'name' => $userName->name,
-                'user_id' => $user->id,
-            ]);
-
+ 
             $chat = Chat::create([
-                'name' => $user->name,
-                'user_id' => $chatWith,
+                'name' =>  $chatName,
+                'user_id' => $user->id,
             ]);
 
             //hago attach a la tabla intermedia con lo usuarios que participan en el chat
@@ -189,7 +181,8 @@ class ChatController extends Controller
                 [
                     "success" => true,
                     "message" => "Chat created succesfully",
-                    "data" => $chattingWith,
+                    "ChatID" => $chat->id,
+                    "data" => $chat,
                 ],
                 Response::HTTP_CREATED
             );
@@ -206,5 +199,62 @@ class ChatController extends Controller
         }
     }
 
-    
+    public function deleteChat(Request $request, $id)
+    {
+        try {
+            $user = auth()->user();
+            $chat = Chat_user::query()
+                ->where('chat_id', $id)
+                ->where('user_id', $user->id)
+                ->first();
+
+            if (!$chat) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "Chat not found",
+                    ],
+                    Response::HTTP_NOT_FOUND
+                );
+            }
+
+            if ($chat->user_id !== $user->id) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "You are not allowed to delete this chat",
+                    ],
+                    Response::HTTP_UNAUTHORIZED
+                );
+            }
+
+            Chat_user::destroy($chat->id);
+            
+            $chatOwner = Chat::query()
+                ->where('id', $id)
+                ->first();
+
+            if ($chatOwner->user_id === $user->id) {
+                Chat::destroy($chatOwner->id);
+            }
+
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "Chat deleted succesfully",
+                ],
+                Response::HTTP_OK
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error deleting the chat"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
 }
