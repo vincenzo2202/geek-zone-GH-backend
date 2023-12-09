@@ -20,9 +20,9 @@ class ChatController extends Controller
 
             //TODO: mirar que tambien el usuario que esta en la intermedia pero no en chat pueda obtener los chats
             $user = auth()->user();
-            $myChats = Chat::query()
+            $myChats = Chat_user::query()
                 ->where('user_id', $user->id)
-                ->with('usersManyToManythroughChat_user')
+                ->with('chat')
                 ->get();
 
             if ($myChats->isEmpty()) {
@@ -37,12 +37,16 @@ class ChatController extends Controller
 
             $mappedMyChats = $myChats->map(function ($chat) {
                 return [
-                    'id' => $chat->id,
-                    'name' => $chat->name,
-                    'user_id' => $chat->user_id,
-                    'created_at' => $chat->created_at,
-                    'updated_at' => $chat->updated_at,
-                    'users_many_to_manythrough_chat_user' => $chat->usersManyToManythroughChat_user->map(function ($user) {
+                    'id' => $chat->chat->id,
+                    'name' => $chat->chat->name,
+                    'user_id_owner' => $chat->chat->user_id,
+                    'created_at' => $chat->chat->created_at,
+                    'updated_at' => $chat->chat->updated_at,
+                    'members' => $chat->chat->usersManyToManythroughChat_user->map(function ($user) {
+                        return $user->id;
+                             
+                    }),
+                    'members_info' => $chat->chat->usersManyToManythroughChat_user->map(function ($user) {
                         return [
                             'id' => $user->id,
                             'name' => $user->name,
@@ -53,6 +57,17 @@ class ChatController extends Controller
                     }),
                 ];
             });
+            
+
+            if(!$mappedMyChats[0]['members']->contains($user->id)){
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "You are not allowed to see this chat",
+                    ],
+                    Response::HTTP_UNAUTHORIZED
+                );
+            }
 
             return response()->json(
                 [
