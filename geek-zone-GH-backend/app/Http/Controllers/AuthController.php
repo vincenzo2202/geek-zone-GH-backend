@@ -74,7 +74,7 @@ class AuthController extends Controller
             'password' => 'required|min:6|max:12|regex:/^[a-zA-Z0-9._-]+$/',
             'city' => 'required|min:3|max:100',
             'phone_number' => 'required|min:3|max:12|regex:/^[0-9]+$/',
-            'photo' => 'min:3|max:255',
+            'photo' => 'max:255',
         ]);
 
         return $validator;
