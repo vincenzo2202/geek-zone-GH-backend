@@ -87,11 +87,28 @@ class FeedController extends Controller
                 ); 
             } 
 
+            $mappingFeed = $feeds->map(function($feed){
+                return [
+                    "id" => $feed->id,
+                    "title" => $feed->title,
+                    "content" => $feed->content,
+                    "photo" => $feed->photo,
+                    "created_at" => $feed->created_at,
+                    "updated_at" => $feed->updated_at,
+                    "user" => [
+                        "User_id" => $feed->user->id,
+                        "name" => $feed->user->name,
+                        "last_name" => $feed->user->last_name,
+                        "photo" => $feed->user->photo,
+                    ],
+                ];
+            });
+
             return response()->json(
                 [
                     "success" => true,
                     "message" => "Posts obtained succesfully",
-                    "data" => $feeds
+                    "data" => $mappingFeed
                 ],
                 Response::HTTP_OK
             );
@@ -194,7 +211,7 @@ class FeedController extends Controller
             return response()->json(
                 [
                     "success" => true,
-                    "message" => "User registered",
+                    "message" => "Post created",
                     "data" => $newFeed
                 ],
                 Response::HTTP_CREATED
