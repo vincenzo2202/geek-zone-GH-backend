@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Validator;
 
+use function PHPSTORM_META\map;
+
 class FeedController extends Controller
 {
     public function getAllfeeds(Request $request)
@@ -70,7 +72,10 @@ class FeedController extends Controller
     {
         try {
             $user = auth()->user();
-            $feeds = Feed::query()->where('user_id', $user->id)->get();
+            $feeds = Feed::query()
+            ->where('user_id', $user->id)
+            ->with('user')
+            ->get();
 
             if($feeds->isEmpty()){
                 return response()->json(
@@ -80,8 +85,8 @@ class FeedController extends Controller
                     ],
                     Response::HTTP_OK
                 ); 
-            }
-    
+            } 
+
             return response()->json(
                 [
                     "success" => true,
@@ -117,12 +122,29 @@ class FeedController extends Controller
                     Response::HTTP_OK
                 ); 
             }
+
+            $mappingFeed = $feeds->map(function($feed){
+                return [
+                    "id" => $feed->id,
+                    "title" => $feed->title,
+                    "content" => $feed->content,
+                    "photo" => $feed->photo,
+                    "created_at" => $feed->created_at,
+                    "updated_at" => $feed->updated_at,
+                    "user" => [
+                        "User_id" => $feed->user->id,
+                        "name" => $feed->user->name,
+                        "last_name" => $feed->user->last_name,
+                        "photo" => $feed->user->photo,
+                    ],
+                ];
+            });
     
             return response()->json(
                 [
                     "success" => true,
                     "message" => "Posts obtained succesfully",
-                    "data" => $feeds
+                    "data" => $mappingFeed
                 ],
                 Response::HTTP_OK
             );
