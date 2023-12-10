@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -15,6 +16,7 @@ class UserController extends Controller
         try {
             $token = auth()->user();
             $user = User::query()->find($token->id);
+            $validator = $this->validateRegister($request);
 
             $name = $request->input('name');
             $last_name = $request->input('last_name');
@@ -23,6 +25,18 @@ class UserController extends Controller
             $city = $request->input('city');
             $phone_number = $request->input('phone_number');
             $photo = $request->input('photo');
+
+
+            if ($validator->fails()) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "Error registering user",
+                        "error" => $validator->errors()
+                    ],
+                    Response::HTTP_BAD_REQUEST
+                );
+            }
 
             if (empty($photo)) {
                 $photo = 'https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png';
@@ -78,6 +92,21 @@ class UserController extends Controller
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );
         }
+    }
+
+    private function validateRegister(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|min:3|max:100',
+            'last_name' => 'required|min:3|max:100',
+            'email' => 'required|unique:users|email',
+            'password' => 'required|min:6|max:12|regex:/^[a-zA-Z0-9._-]+$/',
+            'city' => 'required|min:3|max:100',
+            'phone_number' => 'required|min:3|max:12|regex:/^[0-9]+$/',
+            'photo' => 'max:255',
+        ]);
+
+        return $validator;
     }
  
     public function deleteUser(Request $request)
