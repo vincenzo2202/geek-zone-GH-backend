@@ -44,7 +44,6 @@ class ChatController extends Controller
                     'updated_at' => $chat->chat->updated_at,
                     'members' => $chat->chat->usersManyToManythroughChat_user->map(function ($user) {
                         return $user->id;
-                             
                     }),
                     'members_info' => $chat->chat->usersManyToManythroughChat_user->map(function ($user) {
                         return [
@@ -57,9 +56,9 @@ class ChatController extends Controller
                     }),
                 ];
             });
-            
 
-            if(!$mappedMyChats[0]['members']->contains($user->id)){
+
+            if (!$mappedMyChats[0]['members']->contains($user->id)) {
                 return response()->json(
                     [
                         "success" => false,
@@ -171,12 +170,13 @@ class ChatController extends Controller
             $chatName = $request->input('name');
             $chatWith = $request->input('user_id');
 
-            $chatUser = Chat_user::query()
-                ->where('user_id', $chatWith)
-                ->with('chat')
+            $chatExists = Chat_user::where('user_id', $user->id)
+                ->whereHas('chat.usersManyToManythroughChat_user', function ($chat) use ($chatWith) {
+                    $chat->where('user_id', $chatWith);
+                })
                 ->first();
 
-            if ($chatUser) {
+            if ($chatExists) {
                 return response()->json(
                     [
                         "success" => false,
@@ -185,7 +185,7 @@ class ChatController extends Controller
                     Response::HTTP_BAD_REQUEST
                 );
             }
- 
+
             $chat = Chat::create([
                 'name' =>  $chatName,
                 'user_id' => $user->id,
@@ -247,7 +247,7 @@ class ChatController extends Controller
             }
 
             Chat_user::destroy($chat->id);
-            
+
             $chatOwner = Chat::query()
                 ->where('id', $id)
                 ->first();
