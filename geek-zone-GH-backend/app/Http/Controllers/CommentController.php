@@ -15,8 +15,13 @@ class CommentController extends Controller
     public function getAllCommentsByFeedId(Request $request, $id)
     {
         try {
-            $comments = Comment::query()->where('feed_id', $id)->paginate(5);
-            $commentsArray = Comment::query()->where('feed_id', $id)->get();
+            $comments = Feed::query()
+            ->where('id', $id)
+            ->with('comments', 'comments.user')
+            ->get();
+            $commentsArray = Comment::query()
+            ->where('feed_id', $id) 
+            ->get();
 
             $countComments = sizeof($commentsArray);
 
@@ -30,12 +35,31 @@ class CommentController extends Controller
                 );
             }
 
+            $mappedComments = $comments->map(function ($comment) {
+                return [
+                    "id" => $comment->id,
+                    "comment" => $comment->comments->map(function ($comment) {
+                        return [
+                            "id" => $comment->id,
+                            "comment" => $comment->comment,
+                            "created_at" => $comment->created_at,
+                            "user" => [
+                                "id" => $comment->user->id,
+                                "name" => $comment->user->name,
+                                "last_name" => $comment->user->last_name,
+                            ],
+                        ];
+                    }) 
+                ];
+            });
+
+        
             return response()->json(
                 [
                     "success" => true,
                     "message" => "Comments obtained succesfully",
                     "dataSize" => $countComments, // cuantity of comments
-                    "data" => $comments // information of comments
+                    "data" => $mappedComments // information of comments
                 ],
                 Response::HTTP_OK
             );
