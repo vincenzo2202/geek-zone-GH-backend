@@ -14,7 +14,9 @@ class FeedController extends Controller
     public function getAllfeeds(Request $request)
     {
         try {
-            $feeds = Feed::query()->get();
+            $feeds = Feed::query()
+            ->with('user')
+            ->get();
 
             if($feeds->isEmpty()){
                 return response()->json(
@@ -25,12 +27,29 @@ class FeedController extends Controller
                     Response::HTTP_OK
                 ); 
             }
+
+            $mappingFeeds = $feeds->map(function ($feed) {
+                return [
+                    "id" => $feed->id,
+                    "title" => $feed->title,
+                    "content" => $feed->content,
+                    "photo" => $feed->photo,
+                    "created_at" => $feed->created_at,
+                    "updated_at" => $feed->updated_at,
+                    "user" => [
+                        "User_id" => $feed->user->id,
+                        "name" => $feed->user->name,
+                        "last_name" => $feed->user->last_name,
+                        "photo" => $feed->user->photo,
+                    ],
+                ];
+            });
     
             return response()->json(
                 [
                     "success" => true,
                     "message" => "Posts obtained succesfully",
-                    "data" => $feeds
+                    "data" => $mappingFeeds
                 ],
                 Response::HTTP_OK
             );

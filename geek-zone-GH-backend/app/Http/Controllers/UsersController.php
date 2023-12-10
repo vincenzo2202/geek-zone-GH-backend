@@ -84,6 +84,7 @@ class UsersController extends Controller
     public function getUserById(Request $request, $id)
     {
         try {
+            $myId = auth()->user();
 
             $user = User::query()->where('id', $id)->first();
 
