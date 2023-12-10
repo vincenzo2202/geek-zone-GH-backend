@@ -16,11 +16,14 @@ class LikeController extends Controller
     public function getLikesByFeedId(Request $request, $id)
     {
         try {
-            $likes  = Like::query()->where('feed_id', $id)->get();
+            $feed  = Feed::query()
+            ->where('id', $id)
+            ->with('likes', 'likes.user')
+            ->get();
 
-            $countLikes = sizeof($likes);
+            $countLikes = sizeof($feed);
 
-            if ($likes->isEmpty()) {
+            if ($feed->isEmpty()) {
                 return response()->json(
                     [
                         "success" => true,
@@ -30,12 +33,29 @@ class LikeController extends Controller
                 );
             }
 
+            $mappedLikes = $feed->map(function ($like) {
+                return [
+                    "feed_id" => $like->id,
+                    "likes" => $like->likes->map(function ($like) {
+                        return [
+                            "id" => $like->id,
+                            "created_at" => $like->created_at,
+                            "user" => [
+                                "id" => $like->user->id,
+                                "name" => $like->user->name,
+                                "last_name" => $like->user->last_name,
+                            ],
+                        ];
+                    }) 
+                ];
+            });
+
             return response()->json(
                 [
                     "success" => true,
                     "message" => "Likes obtained succesfully",
                     "dataSize" => $countLikes, // cuantity of likes
-                    "data" => $likes // information of likes
+                    "data" => $mappedLikes // information of likes
 
                 ],
                 Response::HTTP_OK
