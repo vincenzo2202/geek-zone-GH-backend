@@ -91,7 +91,7 @@ class AuthController extends Controller
             if ($validator->fails()) {
                 return response()->json(
                     [
-                        "success" => false,
+                        "success" => true,
                         "message" => "Error login user",
                         "error" => $validator->errors()
                     ],
@@ -107,10 +107,10 @@ class AuthController extends Controller
             if (!$user || !Hash::check($password, $user->password)) {
                 return response()->json(
                     [
-                        "success" => false,
+                        "success" => true,
                         "message" => "Email or password are invalid"
                     ],
-                    Response::HTTP_NOT_FOUND
+                    Response::HTTP_UNAUTHORIZED
                 );
             }
 
