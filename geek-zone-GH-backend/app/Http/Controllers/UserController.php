@@ -19,8 +19,7 @@ class UserController extends Controller
             $validator = $this->validateRegister($request);
 
             $name = $request->input('name');
-            $last_name = $request->input('last_name');
-            $email = $request->input('email');
+            $last_name = $request->input('last_name'); 
             $password = $request->input('password');
             $city = $request->input('city');
             $phone_number = $request->input('phone_number');
@@ -48,11 +47,7 @@ class UserController extends Controller
 
             if ($request->has('last_name')) {
                 $user->last_name = $last_name;
-            }
-
-            if ($request->has('email')) {
-                $user->email = $email;
-            }
+            } 
 
             if ($request->has('password')) {
                 $user->password = bcrypt($password);
@@ -97,12 +92,11 @@ class UserController extends Controller
     private function validateRegister(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required|min:3|max:100',
-            'last_name' => 'required|min:3|max:100',
-            'email' => 'required|unique:users|email',
-            'password' => 'required|min:6|max:12|regex:/^[a-zA-Z0-9._-]+$/',
-            'city' => 'required|min:3|max:100',
-            'phone_number' => 'required|min:3|max:12|regex:/^[0-9]+$/',
+            'name' => 'min:3|max:100',
+            'last_name' => 'min:3|max:100', 
+            'password' => 'min:6|max:12|regex:/^[a-zA-Z0-9._-]+$/',
+            'city' => 'min:3|max:100',
+            'phone_number' => 'min:3|max:12|regex:/^[0-9]+$/',
             'photo' => 'max:255', 
         ]);
 
