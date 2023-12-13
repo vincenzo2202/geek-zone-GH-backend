@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Validator;
-use Laravel\Sanctum\PersonalAccessToken;
+use Illuminate\Support\Facades\Validator; 
 use Symfony\Component\HttpFoundation\Response;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
@@ -100,28 +101,28 @@ class AuthController extends Controller
             }
 
             $email = $request->input('email');
-            $password = $request->input('password');
-
-            $user = User::query()->where('email', $email)->first();
-
-            if (!$user || !Hash::check($password, $user->password)) {
+            $password = $request->input('password'); 
+            $user = User::where('email', $email)->first();
+            
+            if (!$user) {
                 return response()->json(
                     [
                         "success" => true,
-                        "message" => "Email or password are invalid"
+                        "message" => "User not found"
                     ],
-                    Response::HTTP_UNAUTHORIZED
+                    Response::HTTP_NOT_FOUND
                 );
             }
 
-            $token = $user->createToken('apiToken')->plainTextToken;
+            $token = Auth::guard('jwt')->attempt(['email' => $email, 'password' => $password, 'role' => $user->role]);  
+
+
 
             return response()->json(
                 [
                     "success" => true,
                     "message" => "User Logged",
-                    "token" => $token,
-                    "data" => $user
+                    "token" => $token 
                 ]
             );
         } catch (\Throwable $th) {
@@ -166,10 +167,10 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        try {
-            $accessToken = $request->bearerToken();
-            $token = PersonalAccessToken::findToken($accessToken);
-            $token->delete();
+        try { 
+            JWTAuth::invalidate(JWTAuth::getToken());
+
+           
 
             return response()->json(
                 [

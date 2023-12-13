@@ -41,7 +41,8 @@ class FollowerController extends Controller
                     'following_id' => $following->following_id,
                     'created_at' => $following->created_at,
                     'updated_at' => $following->updated_at,
-                    'following' => [
+                    'follow_info' => [
+                        'id' => $following->following->id,
                         'name' => $following->following->name,
                         'last_name' => $following->following->last_name,
                         'photo' => $following->following->photo,
@@ -97,7 +98,8 @@ class FollowerController extends Controller
                     'following_id' => $following->following_id,
                     'created_at' => $following->created_at,
                     'updated_at' => $following->updated_at,
-                    'following' => [
+                    'follow_info' => [
+                        'id' => $following->following->id,
                         'name' => $following->following->name,
                         'last_name' => $following->following->last_name,
                         'photo' => $following->following->photo,
@@ -153,7 +155,8 @@ class FollowerController extends Controller
                     'following_id' => $follower->following_id,
                     'created_at' => $follower->created_at,
                     'updated_at' => $follower->updated_at,
-                    'follower' => [
+                    'follow_info' => [
+                        'id' => $follower->follower->id,
                         'name' => $follower->follower->name,
                         'last_name' => $follower->follower->last_name,
                         'photo' => $follower->follower->photo,

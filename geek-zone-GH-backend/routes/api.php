@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\Response;
 
+ 
 Route::get('/api', function (Request $request) {
    
         return response()->json(
@@ -32,7 +33,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::group([
-    'middleware' => ['auth:sanctum']
+    'middleware' => ['jwt.auth']
 ], function () {
     Route::get('/profile', [AuthController::class, 'profile']);
     Route::post('/logout', [AuthController::class, 'logout']); 
@@ -41,7 +42,7 @@ Route::group([
 });
 // USERS
 Route::group([
-    'middleware' => ['auth:sanctum']
+    'middleware' => ['jwt.auth']
 ], function () {
     Route::get('/allUsers', [UsersController::class, 'getAllUsers']); 
     Route::get('/teachers', [UsersController::class, 'getAllTeachers']); 
@@ -50,7 +51,7 @@ Route::group([
 
 // FEEDS
 Route::group([
-    'middleware' => ['auth:sanctum']
+    'middleware' => ['jwt.auth']
 ], function () {
     Route::get('/feeds', [FeedController::class, 'getAllfeeds']); //obtener todos las publicaciones
     Route::get('/feeds/profile', [FeedController::class, 'getMyFeed']);  //obtener todas las publicaciones de mi perfil
@@ -61,7 +62,7 @@ Route::group([
 });
 //COMMENTS
 Route::group([
-    'middleware' => ['auth:sanctum']
+    'middleware' => ['jwt.auth']
 ], function () {
     Route::get('/comments/{id}', [CommentController::class, 'getAllCommentsByFeedId']);  
     Route::post('/comments', [CommentController::class, 'createCommentByFeedId']);  
@@ -69,7 +70,7 @@ Route::group([
 });
 // LIKES
 Route::group([
-    'middleware' => ['auth:sanctum']
+    'middleware' => ['jwt.auth']
 ], function () { 
     Route::get('/likes/{id}', [LikeController::class, 'getLikesByFeedId']);
     Route::post('/like', [LikeController::class, 'createLikeByFeedId']); 
@@ -78,7 +79,7 @@ Route::group([
 
 // CHATS
 Route::group([
-    'middleware' => ['auth:sanctum']
+    'middleware' => ['jwt.auth']
 ], function () {  
     //TODO: mirar que tambien el usuario que esta en la intermedia pero no en chat pueda obtener los chats
     Route::get('/mychats', [ChatController::class, 'getAllMyChats']); //obtener todos los chats
@@ -89,7 +90,7 @@ Route::group([
 
 // MESSAGES
 Route::group([
-    'middleware' => ['auth:sanctum']
+    'middleware' => ['jwt.auth']
 ], function () { 
     Route::get('/messages/{id}', [MessageController::class, 'getAllMessagesByChatId']); 
     Route::post('/messages', [MessageController::class, 'createMessageByChatId']);
@@ -99,7 +100,7 @@ Route::group([
 
 //FOLLOWERS     
 Route::group([
-    'middleware' => ['auth:sanctum']
+    'middleware' => ['jwt.auth']
 ], function () {
     Route::get('/followings',[FollowerController::class, 'getAllMyFollowings']);
     Route::get('/followings/{id}', [FollowerController::class, 'getFollowingsByUserId']);
@@ -111,21 +112,21 @@ Route::group([
 
 // EVENTS
 Route::group([ 
-    'middleware' => ['auth:sanctum' , 'is_admin' ]
+    'middleware' => ['jwt.auth' , 'is_admin' ]
 ], function () {
     Route::post('/events/create', [EventController::class, 'createEvent']);
     // Route::put('/events', [EventController::class, 'updateEvent']);//future
     Route::delete('/events/{id}', [EventController::class, 'deleteEvent']);
 });
 Route::group([
-    'middleware' => ['auth:sanctum']
+    'middleware' => ['jwt.auth']
 ], function () { 
     Route::get('/events', [EventController::class, 'getAllEvents']);//obtener todos los eventos
 });
 
 // EVENT_USER
 Route::group([
-    'middleware' => ['auth:sanctum']
+    'middleware' => ['jwt.auth']
 ], function () {
     Route::post('/event_user', [EventUserController::class, 'createEventUser']);// asistir a un evento
     Route::get('/event_user/{id}', [EventUserController::class, 'getAllEventUsersByEventId']);//ver todos los asistentes a un evento especifico
@@ -135,7 +136,7 @@ Route::group([
 
 // SUPER_ADMIN
 Route::group([
-    'middleware' => ['auth:sanctum']
+    'middleware' => ['jwt.auth', 'is_super_admin']
 ], function () {
     Route::delete('/deleteOneBySuper/{id}', [SuperAdminController::class, 'deleteOneBySuper']); //borrar un usuario
     Route::put('/changeRole', [SuperAdminController::class, 'changeRole']);// cambiar el rol de un usuario

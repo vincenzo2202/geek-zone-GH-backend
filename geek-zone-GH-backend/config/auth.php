@@ -40,6 +40,11 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'jwt' => [
+            'driver' => 'jwt',
+            'provider' => 'users',
+        ],
     ],
 
     /*
@@ -109,6 +114,8 @@ return [
     | confirmation screen. By default, the timeout lasts for three hours.
     |
     */
+    //guardia jwt
+   
 
     'password_timeout' => 10800,
 

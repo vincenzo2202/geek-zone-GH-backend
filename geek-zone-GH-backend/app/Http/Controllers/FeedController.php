@@ -39,7 +39,7 @@ class FeedController extends Controller
                     "created_at" => $feed->created_at,
                     "updated_at" => $feed->updated_at,
                     "user" => [
-                        "User_id" => $feed->user->id,
+                        "user_id" => $feed->user->id,
                         "name" => $feed->user->name,
                         "last_name" => $feed->user->last_name,
                         "photo" => $feed->user->photo,
