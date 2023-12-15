@@ -23,6 +23,23 @@ class UsersController extends Controller
                     Response::HTTP_OK
                 ); 
             }
+
+             
+
+            $mappedUsers = $users->map(function ($user) {
+                return [
+                    "id" => $user->id,
+                    "name" => $user->name,
+                    "last_name" => $user->last_name,
+                    "email" => $user->email,
+                    "city" => $user->city,
+                    "phone_number" => $user->phone_number,
+                    "photo" => $user->photo,
+                    "role" => $user->role,
+                    "created_at" => $user->created_at,
+                    "updated_at" => $user->updated_at,
+                ];
+            });
     
             return response()->json(
                 [
@@ -86,7 +103,10 @@ class UsersController extends Controller
         try {
             $myId = auth()->user();
 
-            $user = User::query()->where('id', $id)->first();
+            $user = User::query()
+            ->where('id', $id)
+            ->with('followers','followings','feeds','comments','events')
+            ->first();
 
             if(!$user){
                 return response()->json(
@@ -98,11 +118,32 @@ class UsersController extends Controller
                 ); 
             }
 
+            $mappedUsers = [
+                "id" => $user->id,
+                "name" => $user->name,
+                "last_name" => $user->last_name,
+                "email" => $user->email,
+                "city" => $user->city,
+                "phone_number" => $user->phone_number,
+                "photo" => $user->photo,
+                "role" => $user->role,
+                "created_at" => $user->created_at,
+                "updated_at" => $user->updated_at,
+                "followings" => sizeof($user->followers),
+                "followers" => sizeof($user->followings),
+                "feeds" => $user->feeds,
+                "comments" => $user->comments,
+                "likes" => $user->likes, 
+                "events" => $user->events,
+            ];
+            
+            
+
             return response()->json(
                 [
                     "success" => true,
                     "message" => "Teachers obtained succesfully",
-                    "data" => $user
+                    "data" => $mappedUsers
                 ],
                 Response::HTTP_OK
             );

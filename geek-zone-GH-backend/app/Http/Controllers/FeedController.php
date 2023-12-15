@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Validator;
 
-use function PHPSTORM_META\map;
-
 class FeedController extends Controller
 {
     public function getAllfeeds(Request $request)
