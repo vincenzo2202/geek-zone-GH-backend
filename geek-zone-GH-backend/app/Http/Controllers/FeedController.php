@@ -72,7 +72,7 @@ class FeedController extends Controller
             $user = auth()->user();
             $feeds = Feed::query()
             ->where('user_id', $user->id)
-            ->with('user')
+            ->with('user','likes')
             ->get();
 
             if($feeds->isEmpty()){
@@ -99,6 +99,8 @@ class FeedController extends Controller
                         "last_name" => $feed->user->last_name,
                         "photo" => $feed->user->photo,
                     ],
+                    "likes"=> $feed->likes
+
                 ];
             });
 

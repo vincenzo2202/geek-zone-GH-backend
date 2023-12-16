@@ -144,11 +144,16 @@ class AuthController extends Controller
         try {
             $user = auth()->user();
 
+            $userProfile = User::query()
+                ->where('id', $user->id)
+                ->with('followers', 'followings')
+                ->first();
+
             return response()->json(
                 [
                     "success" => true,
                     "message" => "User",
-                    "data" => $user
+                    "data" => $userProfile
                 ],
                 Response::HTTP_OK
             );
