@@ -105,7 +105,7 @@ class UsersController extends Controller
 
             $user = User::query()
             ->where('id', $id)
-            ->with('followers','followings','feeds','comments','events')
+            ->with('followers','followings','comments','events','feeds.likes','feeds.comments' )
             ->first();
 
             if(!$user){
@@ -143,7 +143,7 @@ class UsersController extends Controller
                 [
                     "success" => true,
                     "message" => "Teachers obtained succesfully",
-                    "data" => $mappedUsers
+                    "data" => $user
                 ],
                 Response::HTTP_OK
             );

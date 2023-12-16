@@ -15,7 +15,7 @@ class FeedController extends Controller
     {
         try {
             $feeds = Feed::query()
-            ->with('user')
+            ->with('user','likes')
             ->get();
 
             if($feeds->isEmpty()){
@@ -49,7 +49,7 @@ class FeedController extends Controller
                 [
                     "success" => true,
                     "message" => "Posts obtained succesfully",
-                    "data" => $mappingFeeds
+                    "data" => $feeds
                 ],
                 Response::HTTP_OK
             );
@@ -126,7 +126,10 @@ class FeedController extends Controller
     public function getfeedsByUserId(Request $request, $id)
     {
         try {
-            $feeds = Feed::query()->where('user_id', $id)->get();
+            $feeds = Feed::query()
+            ->where('user_id', $id)
+            ->with('likes')
+            ->get();
 
             if($feeds->isEmpty()){
                 return response()->json(
@@ -152,6 +155,7 @@ class FeedController extends Controller
                         "last_name" => $feed->user->last_name,
                         "photo" => $feed->user->photo,
                     ],
+                    "likes"=> $feed->likes 
                 ];
             });
     
