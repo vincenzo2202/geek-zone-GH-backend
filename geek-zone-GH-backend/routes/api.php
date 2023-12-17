@@ -39,6 +39,7 @@ Route::group([
     Route::post('/logout', [AuthController::class, 'logout']); 
     Route::put('/profile', [UserController::class, 'updateProfile']);
     Route::delete('/user', [UserController::class, 'deleteUser']);
+    Route::get('/validateRole', [AuthController::class, 'validataRole']);
 });
 // USERS
 Route::group([
@@ -112,7 +113,7 @@ Route::group([
 
 // EVENTS
 Route::group([ 
-    'middleware' => ['jwt.auth' , 'is_admin' ]
+    'middleware' => ['jwt.auth' , 'check_admin_or_super_admin']
 ], function () {
     Route::post('/events/create', [EventController::class, 'createEvent']);
     // Route::put('/events', [EventController::class, 'updateEvent']);//future

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Validator; 
+use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -101,9 +101,9 @@ class AuthController extends Controller
             }
 
             $email = $request->input('email');
-            $password = $request->input('password'); 
+            $password = $request->input('password');
             $user = User::where('email', $email)->first();
-            
+
             if (!$user) {
                 return response()->json(
                     [
@@ -114,15 +114,13 @@ class AuthController extends Controller
                 );
             }
 
-            $token = Auth::guard('jwt')->attempt(['email' => $email, 'password' => $password, 'role' => $user->role]);  
-
-
+            $token = Auth::guard('jwt')->attempt(['email' => $email, 'password' => $password, 'role' => $user->role]);
 
             return response()->json(
                 [
                     "success" => true,
-                    "message" => "User Logged",
-                    "token" => $token 
+                    "message" => "User Logged", 
+                    "token" => $token
                 ]
             );
         } catch (\Throwable $th) {
@@ -172,10 +170,8 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        try { 
+        try {
             JWTAuth::invalidate(JWTAuth::getToken());
-
-           
 
             return response()->json(
                 [
@@ -191,6 +187,32 @@ class AuthController extends Controller
                 [
                     "success" => false,
                     "message" => "Error in logout"
+                ],
+                Response::HTTP_INTERNAL_SERVER_ERROR
+            );
+        }
+    }
+
+    public function validataRole(Request $request)
+    {
+        try {
+            $user = auth()->user();
+
+            return response()->json(
+                [
+                    "success" => true,
+                    "message" => "User",
+                    "data" => $user->role
+                ],
+                Response::HTTP_OK
+            );
+        } catch (\Throwable $th) {
+            Log::error($th->getMessage());
+
+            return response()->json(
+                [
+                    "success" => false,
+                    "message" => "Error getting profile user"
                 ],
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );

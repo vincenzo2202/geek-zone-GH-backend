@@ -78,6 +78,8 @@ class EventController extends Controller
             $user = auth()->user();
             $event = Event::query()->find($id);
 
+            $userGetted = User::query()->find($user);
+
             if (!$event) {
                 return response()->json(
                     [
@@ -88,7 +90,7 @@ class EventController extends Controller
                 );
             }
 
-            if ($user->id != $event->user_id) {
+            if ($userGetted->role === "user" ) {
                 return response()->json(
                     [
                         "success" => false,
