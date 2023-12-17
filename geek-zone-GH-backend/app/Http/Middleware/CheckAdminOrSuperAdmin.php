@@ -11,7 +11,7 @@ class CheckAdminOrSuperAdmin
     {
         $user = $request->user();
 
-        if ($user && ($user->hasRole('admin') || $user->hasRole('super-admin'))) {
+        if ($user && ($user->hasRole('admin') || $user->hasRole('super_admin'))) {
             return $next($request);
         }
 
