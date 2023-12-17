@@ -29,6 +29,16 @@ class EventController extends Controller
                     Response::HTTP_BAD_REQUEST
                 );
             }
+            
+            if ($user->role === "user") {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "Unauthorized"
+                    ],
+                    Response::HTTP_UNAUTHORIZED
+                );
+            }
 
             $newEvent = Event::create([
                 'title' => $request->input('title'),
