@@ -97,56 +97,24 @@ class ChatController extends Controller
                 ->with(['usersManyToManythroughChat_user', 'messages'])
                 ->first();
 
-            if (!$chat) {
-                return response()->json(
-                    [
-                        "success" => true,
-                        "message" => "There are not any chats to show",
-                    ],
-                    Response::HTTP_OK
-                );
-            }
-
-            if ($chat->user_id !== $user->id) {
-                return response()->json(
-                    [
-                        "success" => false,
-                        "message" => "You are not allowed to see this chat",
-                    ],
-                    Response::HTTP_UNAUTHORIZED
-                );
-            }
-
-            $mappedChat = [
-                'id' => $chat->id,
-                'name' => $chat->name,
-                'user_id' => $chat->user_id,
-                'created_at' => $chat->created_at,
-                'updated_at' => $chat->updated_at,
-                'users_many_to_manythrough_chat_user' => $chat->usersManyToManythroughChat_user->map(function ($user) {
-                    return [
-                        'id' => $user->id,
-                        'name' => $user->name,
-                        'last_name' => $user->last_name,
-                        'email' => $user->email,
-                        'photo' => $user->photo,
-                    ];
-                }),
-                'messages' => $chat->messages->map(function ($message) {
-                    return [
-                        'id' => $message->id,
-                        'user_id' => $message->user_id,
-                        'message' => $message->message,
-                        'created_at' => $message->created_at,
-                    ];
-                }),
-            ];
-
+                if (!$chat->usersManyToManythroughChat_user->contains(function ($chatUser) use ($user) {
+                    return $chatUser->id === $user->id;
+                })) {
+                    return response()->json(
+                        [
+                            "success" => false, 
+                            "message" => "You are not allowed to see this chat",
+                        ],
+                        Response::HTTP_UNAUTHORIZED
+                    );
+                }
+ 
+ 
             return response()->json(
                 [
                     "success" => true,
                     "message" => "Chat obtained succesfully",
-                    "data" => $mappedChat,
+                    "data" => $chat,
                 ],
                 Response::HTTP_OK
             );
@@ -174,7 +142,21 @@ class ChatController extends Controller
                 ->whereHas('chat.usersManyToManythroughChat_user', function ($chat) use ($chatWith) {
                     $chat->where('user_id', $chatWith);
                 })
+                ->with('chat', 'user')
                 ->first();
+
+            $userExists = User::where('id', $chatWith)
+                ->first();
+
+            if (!$userExists) {
+                return response()->json(
+                    [
+                        "success" => false,
+                        "message" => "User not found",
+                    ],
+                    Response::HTTP_NOT_FOUND
+                );
+            }
 
             if ($chatExists) {
                 return response()->json(
