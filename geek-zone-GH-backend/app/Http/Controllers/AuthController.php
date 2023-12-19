@@ -103,6 +103,16 @@ class AuthController extends Controller
             $email = $request->input('email');
             $password = $request->input('password');
             $user = User::where('email', $email)->first();
+            
+            if (!Hash::check($password, $user->password)) {
+                return response()->json(
+                    [
+                        "success" => true,
+                        "message" => "Email or password incorrect"
+                    ],
+                    Response::HTTP_UNAUTHORIZED
+                );
+            }
 
             if (!$user) {
                 return response()->json(
