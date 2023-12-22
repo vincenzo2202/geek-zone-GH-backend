@@ -15,7 +15,7 @@ class FeedController extends Controller
     {
         try {
             $feeds = Feed::query()
-            ->with('user','likes')
+            ->with('user','likes' )
             ->get();
 
             if($feeds->isEmpty()){
@@ -31,7 +31,7 @@ class FeedController extends Controller
             return response()->json(
                 [
                     "success" => true,
-                    "message" => "Posts obtained succesfully",
+                    "message" => "Posts obtained succesfully", 
                     "data" => $feeds
                 ],
                 Response::HTTP_OK

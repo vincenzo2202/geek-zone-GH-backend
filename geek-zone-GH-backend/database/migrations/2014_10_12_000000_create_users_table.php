@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('password')->nullable(false);
             $table->string('city')->nullable(false);
             $table->integer('phone_number')->nullable(false);
-            $table->string('photo', 255)->default("https://cdn.icon-icons.com/icons2/1378/PNG/512/avatardefault_92824.png");
+            $table->string('photo', 255)->default("https://telefe-static2.akamaized.net/media/256103/usuario-sin-foto-perfil-whatsapp.jpg");
             $table->enum('role',['user','admin','super_admin'])->default('user');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
