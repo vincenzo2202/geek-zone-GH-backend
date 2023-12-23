@@ -553,11 +553,38 @@ You can do this in two ways:
         ```
     - Open a Pull Request.
 
+## Repository Branches
+
+🍃 This project has been developed in the following branches:
+
+1.- **Master**: Considered as the main branch, where the project has been initiated and finalized for deployment purposes.
+
+2.- **Dev**: This branch serves as the pivot for all features.
+
+3.- **Middleware**:  Creation of necessary middlewares for the application, including IsAdmin, IsSuperAdmin, and Auth:Sanctum.
+
+4.- **Models**: Creation of necessary models for database manipulation.
+
+5.- **Seeders**: Creation of necessary seeders for populating the database if needed.
+
 ## License
 
 This project is under the MIT License. Please refer to the LICENSE file for more information.
 
-  
+## Issues and Solutions
+
+### Issue 1: Authentication Configuration
+
+-**Description:** Encountered difficulties during the initial setup of authentication.
+
+-**Solution:** Successfully resolved by reviewing the official documentation and ensuring each step was followed correctly.
+
+### Issue 2: Production Deployment Problems
+
+-**Description:**  Errors were encountered while deploying the application in a production environment, presenting issues with hosting.
+
+-**Solution:**  I have not yet found a solution to this problem.
+
 ## Acknowledgments
 
 This project has been made possible thanks to the hard work of my teachers Daniel Tarazona and David Ochando, who not only share their knowledge but also instill enthusiasm in us for what we are developing.
