@@ -13,8 +13,7 @@ Developed as part of the final project in the Full Stack Developer Bootcamp at G
 <div style="text-align: center;">
     <img src="./assets/home.png" style="width: 800;" />
 </div>
-
-
+ 
 <br>
 
 ## Project content 
@@ -32,10 +31,15 @@ Developed as part of the final project in the Full Stack Developer Bootcamp at G
   <li><a href="#validations">Validations</a></li>
   <li><a href="#future-functionalities">Future Functionalities</a></li>
   <li><a href="#contributions">Contributions</a></li>
+  <li><a href="#repository-branches">Repository Branches</a></li>
+  <li><a href="#issues-and-solutions">Issues and Solutions</a></li>
   <li><a href="#license">License</a></li>  
   <li><a href="#acknowledgments">Acknowledgments</a></li>
   <li><a href="#contact">Contact</a></li>
   <li><a href="#images">Imagenes</a></li>
+  Repository Branches
+Issues and Solutions
+
 </ol>
 
 </details>
