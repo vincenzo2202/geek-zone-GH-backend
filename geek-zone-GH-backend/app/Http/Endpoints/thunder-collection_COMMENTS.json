@@ -1,0 +1,68 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "COMMENTS",
+    "dateExported": "2023-12-23T12:14:36.190Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "41c84131-3935-40d2-8335-70fef7c11c3d",
+            "colId": "f4efe56e-2ef7-49ba-b448-c89625948649",
+            "containerId": "",
+            "name": "Get All Comments By Feed Id",
+            "url": "http://localhost:8000/api/comments/24",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-12-07T18:23:28.648Z",
+            "modified": "2023-12-12T16:49:11.112Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzAyMzk5NzM5LCJleHAiOjE3MDI0MDMzMzksIm5iZiI6MTcwMjM5OTczOSwianRpIjoiU0hVN2JwTFRKaXVBNDV1NSIsInN1YiI6IjIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.qMGU1eih5JSq9JFyI-qyp3Hyr-HOpJkyH-ThNIurwBc"
+            },
+            "tests": []
+        },
+        {
+            "_id": "651bb2f5-088a-406f-ba99-f286a7d356dd",
+            "colId": "f4efe56e-2ef7-49ba-b448-c89625948649",
+            "containerId": "",
+            "name": "Create Comment By Feed Id",
+            "url": "http://localhost:8000/api/comments",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-12-07T19:08:42.335Z",
+            "modified": "2023-12-10T16:08:17.667Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"feed_id\":39,\n  \"comment\": \"Estoy creando un comentario prueba 2 en el feed 39\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "50|jhxPngyqSsNx94VSm8ad3ZpTH7qCrdeaobG6aOtT9bb4e449"
+            },
+            "tests": []
+        },
+        {
+            "_id": "a5f55697-7e52-417e-9d8d-13a97ab9fc8a",
+            "colId": "f4efe56e-2ef7-49ba-b448-c89625948649",
+            "containerId": "",
+            "name": "Delete Comment by Feed Id",
+            "url": "http://localhost:8000/api/comments/38",
+            "method": "DELETE",
+            "sortNum": 30000,
+            "created": "2023-12-07T19:23:01.582Z",
+            "modified": "2023-12-10T16:08:44.576Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "50|jhxPngyqSsNx94VSm8ad3ZpTH7qCrdeaobG6aOtT9bb4e449"
+            },
+            "tests": []
+        }
+    ]
+}

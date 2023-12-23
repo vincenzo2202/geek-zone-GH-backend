@@ -81,8 +81,7 @@ Route::group([
 // CHATS
 Route::group([
     'middleware' => ['jwt.auth']
-], function () {  
-    //TODO: mirar que tambien el usuario que esta en la intermedia pero no en chat pueda obtener los chats
+], function () {   
     Route::get('/mychats', [ChatController::class, 'getAllMyChats']); //obtener todos los chats
     Route::get('/chats/{id}', [ChatController::class, 'getChatById']);//obtener un chat por id con mensajes 
     Route::post('/newchat', [ChatController::class, 'createChat']);//create chat with someone // hacer atach con el usuario que queremos incluir en el chat 
@@ -94,8 +93,7 @@ Route::group([
     'middleware' => ['jwt.auth']
 ], function () { 
     Route::get('/messages/{id}', [MessageController::class, 'getAllMessagesByChatId']); 
-    Route::post('/messages', [MessageController::class, 'createMessageByChatId']);
-    //TODO----------------------------->
+    Route::post('/messages', [MessageController::class, 'createMessageByChatId']); 
     Route::delete('/messages/{id}', [MessageController::class, 'deleteMessageByChatId']);
 }); 
 
@@ -133,8 +131,7 @@ Route::group([
     Route::get('/event_user/{id}', [EventUserController::class, 'getAllEventUsersByEventId']);//ver todos los asistentes a un evento especifico
     Route::delete('/event_user/{id}', [EventUserController::class, 'deleteEventUser']);// dejar de asistir a un evento
 });
-
-
+ 
 // SUPER_ADMIN
 Route::group([
     'middleware' => ['jwt.auth', 'is_super_admin']

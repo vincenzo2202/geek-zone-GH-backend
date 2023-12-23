@@ -1,0 +1,122 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "FOLLOWERS",
+    "dateExported": "2023-12-23T12:15:00.357Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "2baafdff-b058-483e-b544-e6b501ae4e53",
+            "colId": "9a634159-bfc9-4073-9568-8f8d504c54df",
+            "containerId": "",
+            "name": "Get All My Followings",
+            "url": "http://localhost:8000/api/followings",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-12-08T15:12:24.516Z",
+            "modified": "2023-12-08T15:12:54.280Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "21|3Z06OU3qRt3mw7KZxUgClTbPrmwE5qgxkJCXbdvX6a75a3d8"
+            },
+            "tests": []
+        },
+        {
+            "_id": "61300ebf-e032-44ee-8490-87b93fc7575c",
+            "colId": "9a634159-bfc9-4073-9568-8f8d504c54df",
+            "containerId": "",
+            "name": "Get Followings By Users Id",
+            "url": "http://localhost:8000/api/followings/3",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-12-08T15:47:58.998Z",
+            "modified": "2023-12-15T17:21:02.194Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzAyNjYwNDQzLCJleHAiOjE3MDI2NjQwNDMsIm5iZiI6MTcwMjY2MDQ0MywianRpIjoiWVZFQTh5c3dTVkFhZ1BQNiIsInN1YiI6IjIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.nv1OX6srUEolrd4nVVx3mFV3Vpp99tJsJ3OIZTiV9bc"
+            },
+            "tests": []
+        },
+        {
+            "_id": "5432e4e4-e9bf-440d-953d-daf2222d4953",
+            "colId": "9a634159-bfc9-4073-9568-8f8d504c54df",
+            "containerId": "",
+            "name": "Get All My Followers",
+            "url": "http://localhost:8000/api/followers",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2023-12-08T16:00:56.013Z",
+            "modified": "2023-12-13T12:11:20.180Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzAyNDY5NDYzLCJleHAiOjE3MDI0NzMwNjMsIm5iZiI6MTcwMjQ2OTQ2MywianRpIjoiOG43dmtKaGNkQlpSMENUVyIsInN1YiI6IjIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.BlK4rIAP_eXIhzUkph8KZA5Kp-M28eufFw1vZBlvUS0"
+            },
+            "tests": []
+        },
+        {
+            "_id": "6f21c679-8962-42b9-882e-df306ad5a182",
+            "colId": "9a634159-bfc9-4073-9568-8f8d504c54df",
+            "containerId": "",
+            "name": "Get all followers by user id",
+            "url": "http://localhost:8000/api/followers/3",
+            "method": "GET",
+            "sortNum": 50000,
+            "created": "2023-12-08T16:09:35.489Z",
+            "modified": "2023-12-15T20:10:49.592Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzAyNjcxMDM5LCJleHAiOjE3MDI2NzQ2MzksIm5iZiI6MTcwMjY3MTAzOSwianRpIjoiVmV2dm9SREtDNUVIeGpkMiIsInN1YiI6IjIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.3uYRqaVxwLMLPS59I9oWkyMT8mAjapbWb32CJ3N0Na4"
+            },
+            "tests": []
+        },
+        {
+            "_id": "3710aa2a-4ff2-402a-8dc1-79a36c983c58",
+            "colId": "9a634159-bfc9-4073-9568-8f8d504c54df",
+            "containerId": "",
+            "name": "Follow",
+            "url": "http://localhost:8000/api/followers",
+            "method": "POST",
+            "sortNum": 60000,
+            "created": "2023-12-08T16:33:42.904Z",
+            "modified": "2023-12-15T17:14:57.597Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"following_id\": 26\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzAyNjYwNDQzLCJleHAiOjE3MDI2NjQwNDMsIm5iZiI6MTcwMjY2MDQ0MywianRpIjoiWVZFQTh5c3dTVkFhZ1BQNiIsInN1YiI6IjIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.nv1OX6srUEolrd4nVVx3mFV3Vpp99tJsJ3OIZTiV9bc"
+            },
+            "tests": []
+        },
+        {
+            "_id": "29f98261-7316-4dcb-a64c-0241b7e424aa",
+            "colId": "9a634159-bfc9-4073-9568-8f8d504c54df",
+            "containerId": "",
+            "name": "Unfollow",
+            "url": "http://localhost:8000/api/followers/1",
+            "method": "DELETE",
+            "sortNum": 80000,
+            "created": "2023-12-08T16:40:48.669Z",
+            "modified": "2023-12-08T16:42:08.633Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "21|3Z06OU3qRt3mw7KZxUgClTbPrmwE5qgxkJCXbdvX6a75a3d8"
+            },
+            "tests": []
+        }
+    ]
+}

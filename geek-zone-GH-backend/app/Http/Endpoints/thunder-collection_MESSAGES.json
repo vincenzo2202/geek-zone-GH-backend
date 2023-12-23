@@ -1,0 +1,68 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "MESSAGES",
+    "dateExported": "2023-12-23T12:15:20.565Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "c51095fd-8aed-441e-9bb3-348fbe7354f6",
+            "colId": "939c3a8f-bb2d-464c-bf7f-e9df897bc8c2",
+            "containerId": "",
+            "name": "Get  all messages by chat id",
+            "url": "http://localhost:8000/api/messages/20",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-12-09T17:02:47.380Z",
+            "modified": "2023-12-09T17:46:20.467Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "44|2XajF8IroXgvvJ7jy84eABi927ym3oWwW3UyEwPnb810f34e"
+            },
+            "tests": []
+        },
+        {
+            "_id": "23a5b63e-b3ad-487e-a0f4-5173d7676fa0",
+            "colId": "939c3a8f-bb2d-464c-bf7f-e9df897bc8c2",
+            "containerId": "",
+            "name": "Create Message",
+            "url": "http://localhost:8000/api/messages",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-12-09T18:01:39.830Z",
+            "modified": "2023-12-09T18:06:53.564Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"chat_id\":82,\n  \"message\":\"soy el mensaje de prueba\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "44|2XajF8IroXgvvJ7jy84eABi927ym3oWwW3UyEwPnb810f34e"
+            },
+            "tests": []
+        },
+        {
+            "_id": "0589e201-a25a-4be9-b27b-f2e767a12d70",
+            "colId": "939c3a8f-bb2d-464c-bf7f-e9df897bc8c2",
+            "containerId": "",
+            "name": "Delete Message",
+            "url": "http://localhost:8000/api/messages/50",
+            "method": "DELETE",
+            "sortNum": 30000,
+            "created": "2023-12-09T18:11:24.003Z",
+            "modified": "2023-12-09T18:13:07.571Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "44|2XajF8IroXgvvJ7jy84eABi927ym3oWwW3UyEwPnb810f34e"
+            },
+            "tests": []
+        }
+    ]
+}

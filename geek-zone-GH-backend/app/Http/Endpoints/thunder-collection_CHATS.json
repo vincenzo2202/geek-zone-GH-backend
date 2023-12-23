@@ -1,0 +1,86 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "CHATS",
+    "dateExported": "2023-12-23T12:14:50.862Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "168d3cd1-f4f6-44c1-8b10-bea6eb7f064e",
+            "colId": "31b558cf-3c2e-4b10-bf32-bb59e9e2143a",
+            "containerId": "",
+            "name": "Get All My Chats",
+            "url": "http://localhost:8000/api/mychats",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-12-08T12:44:17.589Z",
+            "modified": "2023-12-19T11:44:03.727Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzAyOTg2MjM2LCJleHAiOjE3MDI5ODk4MzYsIm5iZiI6MTcwMjk4NjIzNiwianRpIjoibXFpZklSWHJzM2hxYmVTTiIsInN1YiI6IjIyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyIsInJvbGUiOiJhZG1pbiJ9.NZJ13tmfgh2IuzqeHPzO_SqqT84vMss6ldPKgkyjrG0"
+            },
+            "tests": []
+        },
+        {
+            "_id": "0109a61b-1a0e-4a81-806e-3ec9d6b0016d",
+            "colId": "31b558cf-3c2e-4b10-bf32-bb59e9e2143a",
+            "containerId": "",
+            "name": "Get Chat By ID",
+            "url": "http://localhost:8000/api/chats/113",
+            "method": "GET",
+            "sortNum": 20000,
+            "created": "2023-12-09T12:48:04.419Z",
+            "modified": "2023-12-19T11:21:18.350Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzAyOTg0NTYzLCJleHAiOjE3MDI5ODgxNjMsIm5iZiI6MTcwMjk4NDU2MywianRpIjoiaXNncWZmdnZHaVRWTmN1OCIsInN1YiI6IjI3IiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyIsInJvbGUiOiJ1c2VyIn0.yP5azNkFv-zhPP01XbE9-1E97jsjEJ_uBcjp2KtxyRY"
+            },
+            "tests": []
+        },
+        {
+            "_id": "b5dbffd7-955e-4dfd-bfb6-e1f92cd703aa",
+            "colId": "31b558cf-3c2e-4b10-bf32-bb59e9e2143a",
+            "containerId": "",
+            "name": "Create New Chat",
+            "url": "http://localhost:8000/api/newchat",
+            "method": "POST",
+            "sortNum": 30000,
+            "created": "2023-12-09T13:23:51.976Z",
+            "modified": "2023-12-19T09:49:51.191Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\":\"sasddads\",\n  \"user_id\":22\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzAyOTc4ODU1LCJleHAiOjE3MDI5ODI0NTUsIm5iZiI6MTcwMjk3ODg1NSwianRpIjoiaE84Q2ZzcnE4Q1NleDBLWSIsInN1YiI6IjI3IiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyIsInJvbGUiOiJ1c2VyIn0.sEJ7LBudx1ynhhFTlDpoWxcgz7R9N3bbl46EeDetmHg"
+            },
+            "tests": []
+        },
+        {
+            "_id": "b376cc4e-6754-438a-b583-264f6bbfc068",
+            "colId": "31b558cf-3c2e-4b10-bf32-bb59e9e2143a",
+            "containerId": "",
+            "name": "Delete Chat",
+            "url": "http://localhost:8000/api/chats/75",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2023-12-09T15:17:20.440Z",
+            "modified": "2023-12-09T16:49:14.354Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "43|1ea2JWKh7qacJV68JTCaMVNqzWYA22xOCs4IQj7e4bd2a4e2"
+            },
+            "tests": []
+        }
+    ]
+}

@@ -1,0 +1,127 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "FEEDS",
+    "dateExported": "2023-12-23T12:14:28.966Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "327e4fda-85d5-45e9-a224-c6d821d80036",
+            "colId": "d7d57867-c773-4ce6-a5af-32b81829b231",
+            "containerId": "",
+            "name": "Get All Feeds",
+            "url": "http://localhost:8000/api/feeds",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-12-06T18:33:07.710Z",
+            "modified": "2023-12-22T09:37:18.624Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzAzMjM3ODE3LCJleHAiOjE3MDMyNDE0MTcsIm5iZiI6MTcwMzIzNzgxNywianRpIjoiVTZmZ085ZEZGWE43cmM4UiIsInN1YiI6IjIyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyIsInJvbGUiOiJhZG1pbiJ9.9aLZUZCw--E-jb7EQH1z-tMXBp_LB6n3gAbphwsx-Z0"
+            },
+            "tests": []
+        },
+        {
+            "_id": "091cfd6c-c72f-4983-ba3f-d9a92a304308",
+            "colId": "d7d57867-c773-4ce6-a5af-32b81829b231",
+            "containerId": "",
+            "name": "Get Feed By User Id",
+            "url": "http://localhost:8000/api/feeds/23",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-12-06T18:39:34.334Z",
+            "modified": "2023-12-16T18:39:31.639Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzAyNzUxODExLCJleHAiOjE3MDI3NTU0MTEsIm5iZiI6MTcwMjc1MTgxMSwianRpIjoiQVRqNFJEVnk3eEp1RjlPQSIsInN1YiI6IjIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.faM5YRuIQ3OtCjQQKD7Pmle7L9g6zZkXjj-I8NcdbfM"
+            },
+            "tests": []
+        },
+        {
+            "_id": "eac86edc-0966-479b-af47-f1876b2fa4ef",
+            "colId": "d7d57867-c773-4ce6-a5af-32b81829b231",
+            "containerId": "",
+            "name": "New Feed Post",
+            "url": "http://localhost:8000/api/createFeed",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2023-12-06T19:03:06.709Z",
+            "modified": "2023-12-10T12:20:29.438Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\":\"Esto es un titulo\",\n  \"content\": \"Prueba de create a post\",\n  \"photo\":\"\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "49|R8D2DytTD1CBlM85ErhvtCC8s0Zgc41UhcLpSqpk3c632d9b"
+            },
+            "tests": []
+        },
+        {
+            "_id": "3b6d6805-0960-49b5-bee8-313f93ad1106",
+            "colId": "d7d57867-c773-4ce6-a5af-32b81829b231",
+            "containerId": "",
+            "name": "Update Feed Post",
+            "url": "http://localhost:8000/api/updateFeed",
+            "method": "PUT",
+            "sortNum": 50000,
+            "created": "2023-12-06T20:02:49.635Z",
+            "modified": "2023-12-10T12:23:17.154Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"id\":40,\n  \"title\":\"hola\",\n  \"content\": \"Este es el campus virtual de GeekHubs Academy\",\n  \"photo\":\"ahora hay foto\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "49|R8D2DytTD1CBlM85ErhvtCC8s0Zgc41UhcLpSqpk3c632d9b"
+            },
+            "tests": []
+        },
+        {
+            "_id": "d06baf39-d633-41a5-b1d9-688f5bd5867b",
+            "colId": "d7d57867-c773-4ce6-a5af-32b81829b231",
+            "containerId": "",
+            "name": "Delete Feed Post",
+            "url": "http://localhost:8000/api/deleteFeed/40",
+            "method": "DELETE",
+            "sortNum": 60000,
+            "created": "2023-12-06T20:09:49.906Z",
+            "modified": "2023-12-10T12:24:05.759Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "49|R8D2DytTD1CBlM85ErhvtCC8s0Zgc41UhcLpSqpk3c632d9b"
+            },
+            "tests": []
+        },
+        {
+            "_id": "0e893b6c-f7f7-4111-9c36-148ba9c70123",
+            "colId": "d7d57867-c773-4ce6-a5af-32b81829b231",
+            "containerId": "",
+            "name": "Get My Feeds",
+            "url": "http://localhost:8000/api/feeds/profile",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2023-12-07T15:42:48.466Z",
+            "modified": "2023-12-16T19:20:29.141Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzAyNzUzNDg4LCJleHAiOjE3MDI3NTcwODgsIm5iZiI6MTcwMjc1MzQ4OCwianRpIjoiV09UdHVpMWlmRzZuekpTZiIsInN1YiI6IjIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.ANc_yube5eFDa3yitBWREMlitcwVleXjvk0cqtBfKnc"
+            },
+            "tests": []
+        }
+    ]
+}

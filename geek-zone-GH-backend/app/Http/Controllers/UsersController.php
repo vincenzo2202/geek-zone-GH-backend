@@ -142,7 +142,7 @@ class UsersController extends Controller
             return response()->json(
                 [
                     "success" => true,
-                    "message" => "Teachers obtained succesfully",
+                    "message" => "User obtained succesfully",
                     "data" => $user
                 ],
                 Response::HTTP_OK
@@ -153,7 +153,7 @@ class UsersController extends Controller
             return response()->json(
                 [
                     "success" => false,
-                    "message" => "Error obtaining the teachers"
+                    "message" => "Error obtaining the user"
                 ],
                 Response::HTTP_INTERNAL_SERVER_ERROR
             );
