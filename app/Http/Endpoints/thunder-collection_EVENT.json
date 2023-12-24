@@ -1,0 +1,68 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "EVENT",
+    "dateExported": "2023-12-23T12:15:07.366Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "5ac38663-7dae-40a1-b4f3-5e6937033e64",
+            "colId": "5e6028d5-a006-457c-9f4a-d85aee302907",
+            "containerId": "",
+            "name": "Create Event By Admin",
+            "url": "http://localhost:8000/api/events/create",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-12-08T17:28:01.176Z",
+            "modified": "2023-12-08T18:29:29.115Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"title\":\"Estoy creando el primer evento\",\n  \"content\":\"Esta es la información del evento\",\n  \"event_date\": \"2023-05-20\",\n  \"event_time\":\"20:30\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "24|FyHo54o3Z7CzQWrylYLybT6ih5LpdIqqDLT4LnBZ1d768c5e"
+            },
+            "tests": []
+        },
+        {
+            "_id": "9cb883db-5dbe-49e9-8cbc-b751f6597a85",
+            "colId": "5e6028d5-a006-457c-9f4a-d85aee302907",
+            "containerId": "",
+            "name": "Delete Event by Admin",
+            "url": "http://localhost:8000/api/events/14",
+            "method": "DELETE",
+            "sortNum": 20000,
+            "created": "2023-12-08T18:38:38.347Z",
+            "modified": "2023-12-17T17:08:18.400Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzAyODMyODkwLCJleHAiOjE3MDI4MzY0OTAsIm5iZiI6MTcwMjgzMjg5MCwianRpIjoiN3lSQ1V0SEVXUE1xV0wzcCIsInN1YiI6IjIyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyIsInJvbGUiOiJhZG1pbiJ9.l4I6CSaHI7ece62ccmqG0798Xc0k9Zy7iISlLyDuowQ"
+            },
+            "tests": []
+        },
+        {
+            "_id": "ab44d3b2-f023-4eaa-8c71-d33201284102",
+            "colId": "5e6028d5-a006-457c-9f4a-d85aee302907",
+            "containerId": "",
+            "name": "Get all Events",
+            "url": "http://localhost:8000/api/events",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-12-08T18:46:36.631Z",
+            "modified": "2023-12-16T20:30:00.224Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzAyNzU4NTgxLCJleHAiOjE3MDI3NjIxODEsIm5iZiI6MTcwMjc1ODU4MSwianRpIjoib2JrMEV6TjJLZEx6R3NlQSIsInN1YiI6IjIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.jrJRJrbXaDgMeyj-b5ipfb_ZRA15nZPlbCBcJuAQx_Q"
+            },
+            "tests": []
+        }
+    ]
+}

@@ -1,0 +1,200 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "USERS",
+    "dateExported": "2023-12-23T12:14:09.678Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "229b49c5-27bc-49d9-ab3c-b72834eb4eb1",
+            "colId": "e242fa5a-6620-414a-b8fd-4ea1d0659e3d",
+            "containerId": "",
+            "name": "Register",
+            "url": "http://localhost:8000/api/register",
+            "method": "POST",
+            "sortNum": 10000,
+            "created": "2023-12-06T16:24:36.080Z",
+            "modified": "2023-12-10T11:46:54.557Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": " {\n \"name\": \"Rosa\",\n \"last_name\": \"Tienda\",\n \"email\": \"Rosa@gmail.com\",\n \"password\": \"Aa1234\",\n \"city\": \"Cordoba\",\n \"phone_number\": \"623456789\",\n \"photo\":\"\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "fb60baf4-77e0-4f59-b1f3-6bb0a7136297",
+            "colId": "e242fa5a-6620-414a-b8fd-4ea1d0659e3d",
+            "containerId": "",
+            "name": "Login",
+            "url": "http://localhost:8000/api/login",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-12-06T17:35:28.560Z",
+            "modified": "2023-12-23T08:15:48.937Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"email\": \"andres@gmail.com\",\n  \"password\": \"Aa1234\"\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": " "
+            },
+            "tests": []
+        },
+        {
+            "_id": "97bda67d-8b04-46ad-af57-2f9c4519f486",
+            "colId": "e242fa5a-6620-414a-b8fd-4ea1d0659e3d",
+            "containerId": "",
+            "name": "Profile",
+            "url": "http://localhost:8000/api/profile",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-12-06T17:41:46.396Z",
+            "modified": "2023-12-16T19:04:55.278Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzAyNzUzNDg4LCJleHAiOjE3MDI3NTcwODgsIm5iZiI6MTcwMjc1MzQ4OCwianRpIjoiV09UdHVpMWlmRzZuekpTZiIsInN1YiI6IjIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.ANc_yube5eFDa3yitBWREMlitcwVleXjvk0cqtBfKnc"
+            },
+            "tests": []
+        },
+        {
+            "_id": "753c3f68-4584-4f2f-bd04-87f2a9da1282",
+            "colId": "e242fa5a-6620-414a-b8fd-4ea1d0659e3d",
+            "containerId": "",
+            "name": "Logout",
+            "url": "http://localhost:8000/api/logout",
+            "method": "POST",
+            "sortNum": 40000,
+            "created": "2023-12-06T17:43:15.260Z",
+            "modified": "2023-12-12T08:47:02.688Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzAyMzcwODExLCJleHAiOjE3MDIzNzQ0MTEsIm5iZiI6MTcwMjM3MDgxMSwianRpIjoiNU05NzlwVVNwbjR5Z1JhVSIsInN1YiI6IjIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.vG8Nnw3gol-AGrf4ZsV3osPgRu9XmhCMqSvaHrW6gSA"
+            },
+            "tests": []
+        },
+        {
+            "_id": "73785350-f172-4e4d-987b-1da46555c153",
+            "colId": "e242fa5a-6620-414a-b8fd-4ea1d0659e3d",
+            "containerId": "",
+            "name": "Update Profile",
+            "url": "http://localhost:8000/api/profile",
+            "method": "PUT",
+            "sortNum": 50000,
+            "created": "2023-12-06T17:59:16.793Z",
+            "modified": "2023-12-13T21:00:57.839Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": " {\n \"name\": \"Rosa Maria\",\n \"last_name\": null\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzAyNTAxMDUyLCJleHAiOjE3MDI1MDQ2NTIsIm5iZiI6MTcwMjUwMTA1MiwianRpIjoidldFRkNDMGI0QnNRMkw2aCIsInN1YiI6IjIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.EJdGq67xhp2taEsW3_wH_HJe5MzduF6F2MnVk5JB6Ek"
+            },
+            "tests": []
+        },
+        {
+            "_id": "455fb4c1-938f-402e-accf-3d82abef7556",
+            "colId": "e242fa5a-6620-414a-b8fd-4ea1d0659e3d",
+            "containerId": "",
+            "name": "Delete User",
+            "url": "http://localhost:8000/api/user",
+            "method": "DELETE",
+            "sortNum": 60000,
+            "created": "2023-12-06T18:04:51.119Z",
+            "modified": "2023-12-06T18:05:35.797Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "5|BDQR0Iv59ZgTTyqQkuQLPTQR4GGVAsOYoURsilQR7c088c9f"
+            },
+            "tests": []
+        },
+        {
+            "_id": "14a2365a-bf8e-4f12-9228-f5daf2cbd45b",
+            "colId": "e242fa5a-6620-414a-b8fd-4ea1d0659e3d",
+            "containerId": "",
+            "name": "Get All Users",
+            "url": "http://localhost:8000/api/allUsers",
+            "method": "GET",
+            "sortNum": 70000,
+            "created": "2023-12-06T18:12:08.246Z",
+            "modified": "2023-12-12T08:44:09.266Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzAyMzcwMTcxLCJleHAiOjE3MDIzNzM3NzEsIm5iZiI6MTcwMjM3MDE3MSwianRpIjoiZFNLNXoydUIzZHFmUW5oZyIsInN1YiI6IjIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.zknsoieSSoglNXaOUkYN-Ts0Uecg0akdnyxmXONKzx4"
+            },
+            "tests": []
+        },
+        {
+            "_id": "ffdc4334-c7a4-4fbc-a42d-d0355fecbf02",
+            "colId": "e242fa5a-6620-414a-b8fd-4ea1d0659e3d",
+            "containerId": "",
+            "name": "Get All Teachers",
+            "url": "http://localhost:8000/api/teachers",
+            "method": "GET",
+            "sortNum": 80000,
+            "created": "2023-12-06T18:22:57.780Z",
+            "modified": "2023-12-10T11:57:42.770Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "49|R8D2DytTD1CBlM85ErhvtCC8s0Zgc41UhcLpSqpk3c632d9b"
+            },
+            "tests": []
+        },
+        {
+            "_id": "b771c609-a3aa-4a8d-94a5-11e37f021f29",
+            "colId": "e242fa5a-6620-414a-b8fd-4ea1d0659e3d",
+            "containerId": "",
+            "name": "Get User By Id",
+            "url": "http://localhost:8000/api/user/22",
+            "method": "GET",
+            "sortNum": 90000,
+            "created": "2023-12-07T18:03:21.315Z",
+            "modified": "2023-12-17T10:57:35.322Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzAyODEwNjM5LCJleHAiOjE3MDI4MTQyMzksIm5iZiI6MTcwMjgxMDYzOSwianRpIjoiWFVIVzFVQ01zNXhRa2I5ZSIsInN1YiI6IjIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.xiIbuFiJCUGVkx-2I1ZxSuMYaiUPNzz-a58Igtw32vY"
+            },
+            "tests": []
+        },
+        {
+            "_id": "e3f25a88-58c5-4701-a4e0-660a134e4679",
+            "colId": "e242fa5a-6620-414a-b8fd-4ea1d0659e3d",
+            "containerId": "",
+            "name": "Validate Role ",
+            "url": "http://localhost:8000/api/validateRole",
+            "method": "GET",
+            "sortNum": 100000,
+            "created": "2023-12-16T21:09:16.569Z",
+            "modified": "2023-12-16T21:10:00.994Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzAyNzYwOTg3LCJleHAiOjE3MDI3NjQ1ODcsIm5iZiI6MTcwMjc2MDk4NywianRpIjoiU1dEb2M0UEVxRUVkaU1GaCIsInN1YiI6IjIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.UbmaA5nig78Em4DEZOiH7PwqJXpYsCRg8lyNB12gYn4"
+            },
+            "tests": []
+        }
+    ]
+}

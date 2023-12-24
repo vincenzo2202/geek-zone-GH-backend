@@ -1,0 +1,68 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "LIKES",
+    "dateExported": "2023-12-23T12:14:43.262Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "0f5cafd2-a885-463a-a910-47e8aa0b4954",
+            "colId": "65d6560f-76e8-4f80-9f60-b8c9c7883d04",
+            "containerId": "",
+            "name": "Get Likes By Feed Id",
+            "url": "http://localhost:8000/api/likes/3",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2023-12-08T10:41:34.606Z",
+            "modified": "2023-12-10T16:09:21.551Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "19|jvWGkxIGQBEcaZsVpr6TUuIkXtsSnotZZFfMAXdt76b28898"
+            },
+            "tests": []
+        },
+        {
+            "_id": "f95968dc-1ee9-48b0-a74c-39e7cfa8c16f",
+            "colId": "65d6560f-76e8-4f80-9f60-b8c9c7883d04",
+            "containerId": "",
+            "name": "Create Like by feed",
+            "url": "http://localhost:8000/api/like",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-12-08T11:25:29.302Z",
+            "modified": "2023-12-16T13:40:55.278Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"feed_id\": 3\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzAyNzM0MDQ1LCJleHAiOjE3MDI3Mzc2NDUsIm5iZiI6MTcwMjczNDA0NSwianRpIjoiaFRFT25IenJOb0haZzdFVCIsInN1YiI6IjIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.wUIsSmHZGydunNZXuB60F2XNVIBDqkc6x3x2UkQlwZk"
+            },
+            "tests": []
+        },
+        {
+            "_id": "adc252dc-5032-4e92-b5b7-bb99edeb2178",
+            "colId": "65d6560f-76e8-4f80-9f60-b8c9c7883d04",
+            "containerId": "",
+            "name": "Delete Like",
+            "url": "http://localhost:8000/api/like/1",
+            "method": "DELETE",
+            "sortNum": 30000,
+            "created": "2023-12-08T11:48:59.740Z",
+            "modified": "2023-12-08T11:50:09.869Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "20|tagRzPtpAjNIBGhkncksPtoCo6WNuIL7dM0tnkhs8619ec55"
+            },
+            "tests": []
+        }
+    ]
+}

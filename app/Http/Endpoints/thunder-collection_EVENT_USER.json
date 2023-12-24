@@ -1,0 +1,68 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "EVENT_USER",
+    "dateExported": "2023-12-23T12:15:12.238Z",
+    "version": "1.1",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "d3c87e16-91e4-4523-ae71-a8fb3edd06c6",
+            "colId": "4051ba2c-4e23-4b9e-9488-0762e19e92fc",
+            "containerId": "",
+            "name": "Join Event",
+            "url": "http://localhost:8000/api/event_user",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2023-12-08T19:03:24.771Z",
+            "modified": "2023-12-08T19:07:13.975Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"event_id\": 2\n}",
+                "form": []
+            },
+            "auth": {
+                "type": "bearer",
+                "bearer": "26|6THkOqCpTJU1ZHryh0acWg85IBkmkkD1NnUXR9oj0958bdec"
+            },
+            "tests": []
+        },
+        {
+            "_id": "97c54a3c-d057-43f6-a44b-4f6e9a07a232",
+            "colId": "4051ba2c-4e23-4b9e-9488-0762e19e92fc",
+            "containerId": "",
+            "name": "Get All Users Event Registered",
+            "url": "http://localhost:8000/api/event_user/15",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-12-08T19:12:45.063Z",
+            "modified": "2023-12-17T15:02:15.658Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzAyODI1MzI4LCJleHAiOjE3MDI4Mjg5MjgsIm5iZiI6MTcwMjgyNTMyOCwianRpIjoia0FmSW1xYjY1ZzE2MndadyIsInN1YiI6IjIzIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.t26WvBCLMvsqBc366D300ncV2jwoEk6ML3dFZBVop_E"
+            },
+            "tests": []
+        },
+        {
+            "_id": "55a9db8f-d1a9-48a0-96ac-3004a2d5e092",
+            "colId": "4051ba2c-4e23-4b9e-9488-0762e19e92fc",
+            "containerId": "",
+            "name": "Delete Event_user ",
+            "url": "http://localhost:8000/api/event_user/2",
+            "method": "DELETE",
+            "sortNum": 40000,
+            "created": "2023-12-08T21:04:04.801Z",
+            "modified": "2023-12-08T21:05:04.526Z",
+            "headers": [],
+            "params": [],
+            "auth": {
+                "type": "bearer",
+                "bearer": "26|6THkOqCpTJU1ZHryh0acWg85IBkmkkD1NnUXR9oj0958bdec"
+            },
+            "tests": []
+        }
+    ]
+}
