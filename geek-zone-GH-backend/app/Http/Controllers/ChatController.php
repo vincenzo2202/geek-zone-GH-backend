@@ -16,9 +16,7 @@ class ChatController extends Controller
 {
     public function getAllMyChats(Request $request)
     {
-        try {
-
-            //TODO: mirar que tambien el usuario que esta en la intermedia pero no en chat pueda obtener los chats
+        try { 
             $user = auth()->user();
             $myChats = Chat_user::query()
                 ->where('user_id', $user->id)
