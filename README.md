@@ -2,7 +2,7 @@
 
 <h1 align="center"> 💥Geek Zone Backend 💥</h1>
  
-<div style="text-align: center;"><img src= "./assets/logo1.png" width="300"/></div>
+![Logo](./src/assets/logo1.png)
  
 <br>
 <p align="center"><a href="https://views.d6m2hk6zqt0er.amplifyapp.com/">https://views.d6m2hk6zqt0er.amplifyapp.com/</a></p> 
