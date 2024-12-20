@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('photo', 255)->default("https://telefe-static2.akamaized.net/media/256103/usuario-sin-foto-perfil-whatsapp.jpg");
             $table->enum('role', ['user', 'admin', 'super_admin'])->default('user');
 
-            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+            // $table->timestamp('created_at')->useCurrent();
+            // $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });
     }
 
